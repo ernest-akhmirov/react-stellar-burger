@@ -1,0 +1,44 @@
+.ingredients {
+    display: flex;
+    flex-direction: column;
+    min-width: 600px;
+    min-height: 912px;
+    
+ }
+ 
+ .tab {
+    display: flex;
+    position: sticky;
+    top: 0;
+    background-color: #fff;
+    z-index: 1;
+ }
+ 
+ .cardList {
+    padding: 0 16px 0 16px;
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: 32px;
+    gap: 24px;
+ }
+ 
+ .section {
+    max-width: 600px;
+    overflow-y: auto;
+    max-height: 735px;
+ }
+ 
+ .section::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2f2f37;
+  }
+  
+  .section::-webkit-scrollbar-thumb {
+    scroll-behavior: smooth;
+    background: #8585ad;
+    border: 3px solid #8585ad;
+  }
+  
+  .section::-webkit-scrollbar-thumb:hover {
+    background: #8585ad;
+  }
