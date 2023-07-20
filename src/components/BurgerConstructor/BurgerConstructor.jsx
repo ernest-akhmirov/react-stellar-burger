@@ -11,9 +11,10 @@ import { ingredientPropType } from '../../utils/prop-types'
 
 
 export default function BurgerConstructor({data, openModal}) {
-  const bun = data.find((item) => item.type === "bun");
-  const notBuns = data.filter((item) => item.type !== "bun");
 
+    const bun = data.find((item) => item.type === "bun") || {};
+    const notBuns = data.filter((item) => item.type !== "bun");
+  
   function onClick() {
     const childModal = <OrderDetails order={+"123456"} />;
     openModal(childModal);

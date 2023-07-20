@@ -5,7 +5,7 @@ import { ingredientPropType } from "../../utils/prop-types";
 export default function IngredientDetails({ item }) {
     return (
         <div className={detailsStyle.section}>
-            <p className="text text_type_main-large" style={{ lineHeight: '64px' }}>Детали ингредиента</p>
+            <p className={`${detailsStyle.title} text text_type_main-large `}>Детали ингредиента</p>
             <img src={item.image_large}
                  alt={item.name}
                  className={`${detailsStyle.image} mr-5 ml-5`}/>

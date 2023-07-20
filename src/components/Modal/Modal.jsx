@@ -8,17 +8,18 @@ import ModalOverlay from "../ModalOverlay/ModalOverlay";
 const modalRoot = document.getElementById("modal");
 
 export default function Modal({ closeModal, children, }) {
-    const closeEsc = (evt) => {
-        if (evt.key === "Escape") {
-            evt.preventDefault();
-            closeModal();
-        }
-    };
-
+   
     useEffect(() => {
+        const closeEsc = (evt) => {
+            if (evt.key === "Escape") {
+                evt.preventDefault();
+                closeModal();
+            }
+        };
+
         document.addEventListener("keydown", closeEsc);
         return () => {
-            document.addEventListener("keydown", closeEsc);
+            document.removeEventListener("keydown", closeEsc);
         };
     }, []);
 
