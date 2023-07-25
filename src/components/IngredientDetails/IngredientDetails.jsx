@@ -2,6 +2,7 @@ import React from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
 import { ingredientPropType } from "../../utils/prop-types";
 
+
 export default function IngredientDetails({ item }) {
     return (
         <div className={detailsStyle.section}>

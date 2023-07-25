@@ -1,50 +1,41 @@
 import styles from "./app.module.css";
 import { useState, useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import AppHeader from '../AppHeader/AppHeader';
 import Main from '../Main/Main';
 import Modal from "../Modal/Modal";
+import { fetchIngredients } from "../../services/actions/ingredientsActions";
+import { closeIngredientDetails } from "../../services/actions/ingredientsDetailsActions";
+import IngredientDetails from "../IngredientDetails/IngredientDetails";
 
 function App() {
-    const [ingredients, setIngredients] = useState([]);
-    const [isModalOpen, setIsModalOpen] = useState(false);
-    const [childModal, setChildModal] = useState('')
-
-    const openModal = (noModal) => {
-        setIsModalOpen(true);
-        setChildModal(noModal);
-    }
-
-    const closeModal = () => setIsModalOpen(false);
+    const dispatch = useDispatch();
+    const isModalOpen = useSelector((state) => state.selectedIngredient.isModalOpen);
+    const selectedIngredient = useSelector((state) => state.selectedIngredient.selectedIngredient);
 
     useEffect(() => {
-        const getData = async () => {
-            try {
-                const res = await fetch(`https://norma.nomoreparties.space/api/ingredients`);
-                if (!res.ok) {
-                    throw new Error(`Ошибка: ${res.status} - ${res.statusText}`);
-                }
-            const resJson = await res.json();
-            setIngredients(resJson.data);
-            } 
-            catch (error) {
-                console.error(error);
-            }
-        };
-        getData();
-    }, []);
-    
+        dispatch(fetchIngredients());
+      }, [dispatch]);
 
+    
+    
+      const closeModal = () => {
+        dispatch(closeIngredientDetails());
+      };
+    
     return (
         <div className={styles.app}>
             <AppHeader />
-            <Main data={ingredients} openModal={openModal} />
-            {isModalOpen && (
-            <Modal  closeModal={closeModal} >
-                {childModal}
-            </Modal>
+            <Main  />
+            {isModalOpen && selectedIngredient && (
+                <Modal closeModal={closeModal}>
+                    <IngredientDetails item={selectedIngredient} />
+                </Modal>
             )}
         </div>
     );
 }
 
 export default App;
+
+{/* <Modal closeModal={closeModal} ></Modal> */}
