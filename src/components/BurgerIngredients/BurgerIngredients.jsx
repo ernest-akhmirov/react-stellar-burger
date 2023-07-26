@@ -6,6 +6,7 @@ import PropTypes from "prop-types";
 import { ingredientPropType } from "../../utils/prop-types";
 import { useSelector, useDispatch } from "react-redux";
 
+
 export default function BurgerIngredients() {
     const data = useSelector((state) => state.ingredients.ingredients);
     
