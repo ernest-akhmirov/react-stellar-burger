@@ -1,11 +1,11 @@
 import constuctorStyle from '../BurgerConstructor/BurgerConstructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement'; 
-import OrderDetails from '../OrderDetails/OrderDetails';
 import PropTypes from 'prop-types';
 import { ingredientPropType } from '../../utils/prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBurgerIngredient, removeBurgedIngredient, moveNotBunsIngredient } from '../../services/actions/burgerConstructorActions';
+import { placeOrder } from '../../services/actions/orderActions'; 
 import { useDrop } from 'react-dnd';
 import { useMemo } from 'react';
 
@@ -16,9 +16,11 @@ export default function BurgerConstructor() {
   const bun = useSelector((state) => state.burgerFilling.bun);
   const notBuns = useSelector((state) => state.burgerFilling.notBuns);
 
+  const ingredientsList = notBuns.map((item) => item._id);
+  ingredientsList.unshift(bun._id);
+
   function onClick() {
-    // const childModal = <OrderDetails order={+"123456"} />;
-    // openModal(childModal);
+    dispatch(placeOrder(ingredientsList));
   }
 
   const [, dropRef] = useDrop({

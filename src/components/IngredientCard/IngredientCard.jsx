@@ -1,6 +1,5 @@
 import cardStyle from "../IngredientCard/IngredientCard.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import PropTypes from "prop-types";
 import { ingredientPropType } from '../../utils/prop-types'
 import { useDispatch, useSelector } from "react-redux";
