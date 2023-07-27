@@ -2,9 +2,9 @@ import {
     GET_INGREDIENTS_REQUEST,
     GET_INGREDIENTS_SUCCESS,
     GET_INGREDIENTS_ERROR,
+    BASE_URL
 } from "../constants";
-
-const API_URL = "https://norma.nomoreparties.space/api/ingredients";
+import { checkResponse } from "../../utils/api";
 
 export const getIngredientsRequest = () => ({
     type: GET_INGREDIENTS_REQUEST,
@@ -24,12 +24,8 @@ export const fetchIngredients = () => {
         dispatch(getIngredientsRequest());
 
         try {
-            const res = await fetch(API_URL);
-            if (!res.ok) {
-                throw new Error(`Ошибка: ${res.status} - ${res.statusText}`);
-            }
-
-            const resJson = await res.json();
+            const res = await fetch(`${BASE_URL}ingredients`);
+            const resJson = await checkResponse(res);
             dispatch(getIngredientsSuccess(resJson.data));
         } catch (error) {
             dispatch(getIngredientsError());

@@ -2,8 +2,6 @@ import React, { useRef, useState, useMemo, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientsStyles from "./BurgerIngredients.module.css";
 import IngredientCard from "../IngredientCard/IngredientCard";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
 import { useSelector, } from "react-redux";
 import { useInView } from "react-intersection-observer";
 
@@ -98,7 +96,3 @@ export default function BurgerIngredients() {
     );
 }
 
-BurgerIngredients.propTypes = {
-    data: PropTypes.arrayOf(ingredientPropType),
-    openModal: PropTypes.func,
-};

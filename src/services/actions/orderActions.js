@@ -3,9 +3,9 @@ import {
     PLACE_ORDER_SUCCESS,
     PLACE_ORDER_ERROR,
     CLOSE_ORDER_DETAILS,
+    BASE_URL
   } from "../constants";
-
-  const API_URL = "https://norma.nomoreparties.space/api/orders";
+import { checkResponse } from "../../utils/api";
 
   export const placeOrderRequest = () => ({
     type: PLACE_ORDER_REQUEST,
@@ -29,19 +29,14 @@ import {
       dispatch(placeOrderRequest());
   
       try {
-        const response = await fetch(API_URL, {
+        const res = await fetch(`${BASE_URL}orders`, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
           },
           body: JSON.stringify({ ingredients: ingredientsIds }),
         });
-  
-        if (!response.ok) {
-          throw new Error(`Ошибка: ${response.status} - ${response.statusText}`);
-        }
-  
-        const orderData = await response.json();
+        const orderData = await checkResponse(res);
         dispatch(placeOrderSuccess(orderData));
       } catch (error) {
         dispatch(placeOrderError());

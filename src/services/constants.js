@@ -19,3 +19,5 @@ export const PLACE_ORDER_ERROR = "PLACE_ORDER_ERROR";
 
 //Order Detailes 
 export const CLOSE_ORDER_DETAILS = "CLOSE_ORDER_DETAILS";
+
+export const BASE_URL = "https://norma.nomoreparties.space/api/";

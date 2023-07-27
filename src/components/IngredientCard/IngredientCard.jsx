@@ -48,5 +48,4 @@ export default function IngredientCard({ item }) {
 
 IngredientCard.propTypes = {
     item: ingredientPropType,
-    openModal: PropTypes.func,
 };

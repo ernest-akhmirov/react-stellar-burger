@@ -1,8 +1,6 @@
 import constuctorStyle from '../BurgerConstructor/BurgerConstructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
 import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement'; 
-import PropTypes from 'prop-types';
-import { ingredientPropType } from '../../utils/prop-types';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBurgerIngredient, removeBurgedIngredient, moveNotBunsIngredient } from '../../services/actions/burgerConstructorActions';
 import { placeOrder } from '../../services/actions/orderActions'; 
@@ -108,7 +106,3 @@ export default function BurgerConstructor() {
   );
 }
 
-BurgerConstructor.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType),
-  openModal: PropTypes.func,
-};
