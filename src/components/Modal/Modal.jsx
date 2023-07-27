@@ -44,5 +44,4 @@ return ReactDOM.createPortal(
 Modal.propTypes = {
     children: PropTypes.element,
     closeModal: PropTypes.func,
-    headerModal: PropTypes.string,
 };

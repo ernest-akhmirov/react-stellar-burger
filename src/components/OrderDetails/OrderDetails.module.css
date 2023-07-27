@@ -18,4 +18,7 @@
     height: 120px;
   }
 
-  
+  .name {
+    max-width: 500px;
+    text-align: center;
+   }

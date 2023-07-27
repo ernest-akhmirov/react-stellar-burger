@@ -1,18 +1,23 @@
-import React, { useRef, useState, useMemo } from "react";
+import React, { useRef, useState, useMemo, useEffect } from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientsStyles from "./BurgerIngredients.module.css";
 import IngredientCard from "../IngredientCard/IngredientCard";
-import PropTypes from "prop-types";
-import { ingredientPropType } from "../../utils/prop-types";
+import { useSelector, } from "react-redux";
+import { useInView } from "react-intersection-observer";
 
-export default function BurgerIngredients({ data, openModal }) {
+export default function BurgerIngredients() {
+    const data = useSelector((state) => state.ingredients.ingredients);
+    const [current, setCurrent] = useState("bun");
+
     const sectionRefs = {
         bun: useRef(null),
         sauce: useRef(null),
         main: useRef(null),
     };
 
-    const [current, setCurrent] = useState("bun");
+    const { ref: bunRef, inView: bunInView } = useInView();
+    const { ref: sauceRef, inView: sauceInView } = useInView();
+    const { ref: mainRef, inView: mainInView } = useInView();
 
     const { buns, sauces, main } = useMemo(() => {
         const buns = data.filter((item) => item.type === "bun");
@@ -29,75 +34,65 @@ export default function BurgerIngredients({ data, openModal }) {
 
     const scrollToSection = (type) => {
         const sectionRef = sectionRefs[type].current;
-        if (sectionRef) {
-            sectionRef.scrollIntoView({
-            behavior: "smooth",
-            block: "start",
-        });
+        sectionRef.scrollIntoView({
+          behavior: "smooth", 
+          block: "start"
+        });     
+      };
+      
+
+    useEffect(() => {
+        if (bunInView) {
+            setCurrent('bun')
         }
-    };
+        if (sauceInView) {
+            setCurrent('sauce')
+        }
+        if (mainInView) {
+            setCurrent('main')
+        }
+    }, [bunInView, sauceInView, mainInView])
+
+    const componentData = [
+        { title: "Булки", data: buns, type: "bun" },
+        { title: "Соусы", data: sauces, type: "sauce" },
+        { title: "Начинки", data: main, type: "main" },
+    ]
 
     return (
         <div className={`${ingredientsStyles.ingredients} ml-4`}>
             <h2 className="text text_type_main-large mt-10">Соберите бургер</h2>
             <div className={`${ingredientsStyles.tab} mt-5`}>
-                <Tab type="bun"
-                     active={current === "bun"}
-                     onClick={() => handleTabClick("bun")}>Булки</Tab>
-
-                <Tab type="sauce"
-                     active={current === "sauce"}
-                     onClick={() => handleTabClick("sauce")}>Соусы</Tab>
-
-                <Tab type="main"
-                     active={current === "main"}
-                     onClick={() => handleTabClick("main")}>Начинки</Tab>
+                {componentData.map((tab) => (
+                    <Tab
+                        key={tab.type}
+                        type={tab.type}
+                        active={current === tab.type}
+                        onClick={() => handleTabClick(tab.type)}
+                    >
+                        {tab.title}
+                    </Tab>))}
             </div>
 
-        <section className={ingredientsStyles.section}>
-            <div ref={sectionRefs.bun}>
-                <h3 className="text text_type_main-medium mb-6 mt-10">Булки</h3>
-                <div className={ingredientsStyles.cardList}>
-                    {buns.map((item) => (
-                        <IngredientCard
-                        item={item}
-                        key={item._id}
-                        openModal={openModal}
-                        />
-                    ))}
-                </div>
-            </div>
-            <div ref={sectionRefs.sauce}>
-                <h3 className="text text_type_main-medium mb-6 mt-10">Соусы</h3>
-                <div className={ingredientsStyles.cardList}>
-                    {sauces.map((item) => (
-                        <IngredientCard
-                        item={item}
-                        key={item._id}
-                        openModal={openModal}
-                        />
-                    ))}
-                </div>
-            </div>
+            <section className={ingredientsStyles.section}>
+                {componentData.map((tab) => (
+                    <div key={tab.type} ref={sectionRefs[tab.type]}>
+                        <h3 className="text text_type_main-medium mb-6 mt-10">{tab.title}</h3>
+                        <div className={ingredientsStyles.cardList} 
+                            ref={tab.type === 'bun' ? bunRef : 
+                            tab.type === 'sauce' ? sauceRef : mainRef}>
+                            {tab.data.map((item) => (
+                                <IngredientCard
+                                    item={item}
+                                    key={item._id}
+                                />
+                            ))}
+                        </div>
+                    </div>
+                ))}
+            </section>
 
-            <div ref={sectionRefs.main}>
-                <h3 className="text text_type_main-medium mb-6 mt-10">Начинки</h3>
-                <div className={ingredientsStyles.cardList}>
-                    {main.map((item) => (
-                        <IngredientCard
-                        item={item}
-                        key={item._id}
-                        openModal={openModal}
-                        />
-                    ))}
-                </div>
-            </div>
-        </section>
-    </div>
-  );
+        </div>
+    );
 }
 
-BurgerIngredients.propTypes = {
-  data: PropTypes.arrayOf(ingredientPropType),
-  openModal: PropTypes.func,
-};

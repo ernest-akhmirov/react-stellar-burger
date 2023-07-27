@@ -25,7 +25,7 @@
  .section {
     max-width: 600px;
     overflow-y: auto;
-    max-height: 735px;
+    max-height: 912px;
  }
  
  .section::-webkit-scrollbar {

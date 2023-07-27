@@ -5,7 +5,6 @@ export const ingredientPropType = PropTypes.shape({
   image: PropTypes.string,
   name: PropTypes.string,
   price: PropTypes.number,
-  image: PropTypes.string,
   type: PropTypes.string,
   proteins: PropTypes.number,
   fat: PropTypes.number,

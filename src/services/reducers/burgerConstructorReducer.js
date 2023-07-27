@@ -1,0 +1,48 @@
+import {
+    ADD_BURGER_INGREDIENT,
+    REMOVE_BURGER_INGREDIENT,
+    MOVE_NOTBUNS_INGREDIENT
+} from "../constants";
+
+import update from "immutability-helper";
+
+const initialState = {
+    bun: {},
+    notBuns: [],
+};
+
+export const burgerConstructorReducer = (state = initialState, action) => {
+    switch (action.type) {
+        case ADD_BURGER_INGREDIENT: {
+            if (action.ingredient.type === "bun") {
+                return { ...state, bun: action.ingredient };
+            }
+            return {
+                ...state,
+                notBuns: [...state.notBuns, action.ingredient],
+            };
+        }
+        case REMOVE_BURGER_INGREDIENT: {
+            return {
+                ...state,
+                notBuns: state.notBuns.filter((ingredient) => ingredient.additionalId !== action.additionalId),
+            };
+        }
+        case MOVE_NOTBUNS_INGREDIENT: {
+            const { dragIndex, hoverIndex } = action.payload;
+            const updatedNotBuns = update(state.notBuns, {
+              $splice: [
+                [dragIndex, 1],
+                [hoverIndex, 0, state.notBuns[dragIndex]],
+              ],
+            });
+            return {
+              ...state,
+              notBuns: updatedNotBuns,
+            };
+          }
+
+        default:
+            return state;
+    }
+}
