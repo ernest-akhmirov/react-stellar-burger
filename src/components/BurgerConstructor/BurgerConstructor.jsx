@@ -1,9 +1,9 @@
 import constuctorStyle from '../BurgerConstructor/BurgerConstructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement'; 
+import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBurgerIngredient, removeBurgedIngredient, moveNotBunsIngredient } from '../../services/actions/burgerConstructorActions';
-import { placeOrder } from '../../services/actions/orderActions'; 
+import { placeOrder } from '../../services/actions/orderActions';
 import { useDrop } from 'react-dnd';
 import { useMemo } from 'react';
 

@@ -1,15 +1,29 @@
 import React from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
-import { ingredientPropType } from "../../utils/prop-types";
+import { useSelector } from "react-redux";
+import { useParams } from "react-router";
 
 
-export default function IngredientDetails({ item }) {
+export default function IngredientDetails() {
+    const { id } = useParams()
+
+    const ingredients = useSelector((state) => state.ingredients.ingredients);
+    const item = ingredients.find((el) => el._id === id);
+
+    if (!item) {
+        return (
+            <div>
+                <p className="text text_type_main-medium mt-10">Такого ингредиента нет</p>
+            </div>
+        );
+    }
+
     return (
         <div className={detailsStyle.section}>
             <p className={`${detailsStyle.title} text text_type_main-large `}>Детали ингредиента</p>
             <img src={item.image_large}
-                 alt={item.name}
-                 className={`${detailsStyle.image} mr-5 ml-5`}/>
+                alt={item.name}
+                className={`${detailsStyle.image} mr-5 ml-5`} />
             <p className={`${detailsStyle.name} text text_type_main-medium mt-4`}>
                 {item.name}
             </p>
@@ -35,6 +49,3 @@ export default function IngredientDetails({ item }) {
     );
 }
 
-IngredientDetails.propTypes = {
-  item: ingredientPropType,
-};

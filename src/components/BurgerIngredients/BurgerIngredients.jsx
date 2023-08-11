@@ -4,10 +4,12 @@ import ingredientsStyles from "./BurgerIngredients.module.css";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import { useSelector, } from "react-redux";
 import { useInView } from "react-intersection-observer";
+import Preloader from "../Preloader/Preloader";
 
 export default function BurgerIngredients() {
     const data = useSelector((state) => state.ingredients.ingredients);
     const [current, setCurrent] = useState("bun");
+    const [loading, setLoading] = useState(true);
 
     const sectionRefs = {
         bun: useRef(null),
@@ -35,20 +37,26 @@ export default function BurgerIngredients() {
     const scrollToSection = (type) => {
         const sectionRef = sectionRefs[type].current;
         sectionRef.scrollIntoView({
-          behavior: "smooth", 
-          block: "start"
-        });     
-      };
-      
+            behavior: "smooth",
+            block: "start"
+        });
+    };
+
+    useEffect(() => {
+        if (data.length > 0) {
+            setLoading(false);
+        }
+    }, [data]);
+
 
     useEffect(() => {
         if (bunInView) {
             setCurrent('bun')
         }
-        if (sauceInView) {
+        else if (sauceInView) {
             setCurrent('sauce')
         }
-        if (mainInView) {
+        else if (mainInView) {
             setCurrent('main')
         }
     }, [bunInView, sauceInView, mainInView])
@@ -73,24 +81,27 @@ export default function BurgerIngredients() {
                         {tab.title}
                     </Tab>))}
             </div>
-
-            <section className={ingredientsStyles.section}>
-                {componentData.map((tab) => (
-                    <div key={tab.type} ref={sectionRefs[tab.type]}>
-                        <h3 className="text text_type_main-medium mb-6 mt-10">{tab.title}</h3>
-                        <div className={ingredientsStyles.cardList} 
-                            ref={tab.type === 'bun' ? bunRef : 
-                            tab.type === 'sauce' ? sauceRef : mainRef}>
-                            {tab.data.map((item) => (
-                                <IngredientCard
-                                    item={item}
-                                    key={item._id}
-                                />
-                            ))}
+            {loading ? (
+                <Preloader /> // Показываем лоадер, если данные загружаются
+            ) : (
+                <section className={ingredientsStyles.section}>
+                    {componentData.map((tab) => (
+                        <div key={tab.type} ref={sectionRefs[tab.type]}>
+                            <h3 className="text text_type_main-medium mb-6 mt-10">{tab.title}</h3>
+                            <div className={ingredientsStyles.cardList}
+                                ref={tab.type === 'bun' ? bunRef :
+                                    tab.type === 'sauce' ? sauceRef : mainRef}>
+                                {tab.data.map((item) => (
+                                    <IngredientCard
+                                        item={item}
+                                        key={item._id}
+                                    />
+                                ))}
+                            </div>
                         </div>
-                    </div>
-                ))}
-            </section>
+                    ))}
+                </section>
+            )}
 
         </div>
     );
