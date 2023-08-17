@@ -19,7 +19,7 @@ export function RegistrationPage() {
         navigate("/login");
     };
 
-    const registerUser = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
         dispatch(register(form));
     };
@@ -31,7 +31,7 @@ export function RegistrationPage() {
 
 
     return (
-        <form className={style.main}>
+        <form className={style.main} onSubmit={onSubmit}>
             <h2 className="text text_type_main-large">Регистрация</h2>
             <div className="mt-6">
                 <Input
@@ -41,6 +41,7 @@ export function RegistrationPage() {
                     name={"name"}
                     onChange={onChange}
                     autoComplete="name"
+                    required
                 />
             </div>
             <div className="mt-6">
@@ -51,6 +52,7 @@ export function RegistrationPage() {
                     name={"email"}
                     onChange={onChange}
                     autoComplete="email"
+                    required
                 />
             </div>
             <div className="mt-6">
@@ -63,13 +65,14 @@ export function RegistrationPage() {
                     onChange={onChange}
                     onIconClick={togglePasswordVisibility}
                     autoComplete="current-password"
+                    required
                 />
             </div>
             <Button extraClass="mt-6"
-                htmlType="button"
+                htmlType="submit"
                 type="primary"
                 size="medium"
-                onClick={registerUser}>
+                >
                 Зарегистрироваться
             </Button>
             <div className={`mt-20 ${style.footer}`}>

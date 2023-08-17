@@ -1,18 +1,21 @@
 import { useState } from 'react';
 import style from "./style.module.css";
 import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useLocation, useNavigate, Navigate } from "react-router-dom";
-import { useDispatch, useSelector } from 'react-redux';
+import { useNavigate, Navigate} from "react-router-dom";
+import {useDispatch, useSelector,} from 'react-redux';
 import { requestResetPassword } from '../services/actions/authActions';
 
 
 export function ResetPasswordPage() {
     const navigate = useNavigate();
     const dispatch = useDispatch();
-    const location = useLocation();
     const [form, setValue] = useState(() => ({  password: "", code: "" }));
     const [showPassword, setShowPassword] = useState(false);
+    const isRememberVisited = useSelector((state) => state.authReducer.isPasswordResetPending);
 
+    if (!isRememberVisited) {
+        return <Navigate to="/forgot-password" replace={true} />;
+    }
     const onChange = (e) => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
@@ -21,10 +24,10 @@ export function ResetPasswordPage() {
         navigate("/login");
     };
     
-    const savePassword = async (e) =>{ 
+    const onSubmit = (e) =>{
         console.log('установлен новый пароль')
         e.preventDefault();
-         await dispatch(requestResetPassword(form.password, form.code));
+        dispatch(requestResetPassword(form.password, form.code));
         navigate("/login");
         };
     
@@ -33,7 +36,7 @@ export function ResetPasswordPage() {
     };
 
     return (
-        <form className={style.main}>
+        <form className={style.main} onSubmit={onSubmit}>
             <h2 className="text text_type_main-large">Восстановление пароля</h2>
             <div className="mt-6">
                 <Input
@@ -45,6 +48,7 @@ export function ResetPasswordPage() {
                     onChange={onChange}
                     onIconClick={togglePasswordVisibility}
                     autoComplete="current-password"
+                    required
                 />
             </div>
             <div className="mt-6">
@@ -55,13 +59,14 @@ export function ResetPasswordPage() {
                     name={"code"}
                     onChange={onChange}
                     autoComplete="code"
+                    required
                 />
             </div>
             <Button extraClass="mt-6"
-                    htmlType="button" 
+                    htmlType="submit"
                     type="primary" 
-                    size="medium" 
-                    onClick={savePassword}>
+                    size="medium"
+            >
                 Сохранить
             </Button>
             <div className={`mt-20 ${style.footer}`}>

@@ -1,7 +1,7 @@
 import { useState, useEffect } from 'react';
 import style from "./style.module.css";
 import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate, useLocation } from "react-router-dom";
+import { useNavigate, } from "react-router-dom";
 import { useDispatch, useSelector, } from 'react-redux';
 import { login } from '../services/actions/authActions';
 
@@ -17,7 +17,7 @@ export function LoginPage() {
 
     const isAuthorized = useSelector((store) => store.authReducer.isAuthorized);
 
-    const loginUser = (e) => {
+    const onSubmit = (e) => {
         e.preventDefault();
         dispatch(login(form));
     };
@@ -39,13 +39,13 @@ export function LoginPage() {
     };
 
     const togglePasswordVisibility = () => {
-
         setShowPassword(!showPassword);
     };
 
 
     return (
-        <form className={style.main}>
+        <>
+        <form className={style.main} onSubmit={onSubmit}>
             <h2 className="text text_type_main-large">Вход</h2>
             <div className="mt-6">
                 <Input
@@ -55,6 +55,7 @@ export function LoginPage() {
                     name={"email"}
                     onChange={onChange}
                     autoComplete="email"
+                    required
                 />
             </div>
             <div className="mt-6">
@@ -67,15 +68,17 @@ export function LoginPage() {
                     onChange={onChange}
                     onIconClick={togglePasswordVisibility}
                     autoComplete="current-password"
+                    required
                 />
             </div>
             <Button extraClass="mt-6"
-                htmlType="button"
+                htmlType="submit"
                 type="primary"
                 size="medium"
-                onClick={loginUser}>
+                >
                 Войти
             </Button>
+        </form>
             <div className={`mt-20 ${style.footer}`}>
                 <p className="text text_type_main-default text_color_inactive">
                     Вы новый пользователь?
@@ -102,7 +105,7 @@ export function LoginPage() {
                     Восстановить пароль
                 </Button>
             </div>
-        </form>
+        </>
     );
 }
 

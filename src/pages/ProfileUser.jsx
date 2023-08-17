@@ -29,14 +29,14 @@ export function ProfileUser() {
 		setValue(user);
 	}
 
-	const handleSave = (e) => {
+	const onSubmit = (e) => {
 		e.preventDefault();
 		dispatch(updateUser(form));
 	}
 
 
 	return (
-		<form>
+		<form onSubmit={onSubmit}>
 			<Input
 				type={"text"}
 				placeholder={"Имя"}
@@ -48,6 +48,7 @@ export function ProfileUser() {
 				size={"default"}
 				extraClass="mb-6"
 				onChange={onChange}
+				required
 			/>
 			<Input
 				type={"email"}
@@ -60,6 +61,7 @@ export function ProfileUser() {
 				size={"default"}
 				extraClass="mb-6"
 				onChange={onChange}
+				required
 			/>
 			<Input
 				type={"password"}
@@ -84,11 +86,10 @@ export function ProfileUser() {
 					Отмена
 				</Button>
 				<Button
-					htmlType="button"
+					htmlType="submit"
 					type="primary"
 					size="medium"
 					extraClass="ml-2"
-					onClick={handleSave}
 				>
 					Сохранить
 				</Button>

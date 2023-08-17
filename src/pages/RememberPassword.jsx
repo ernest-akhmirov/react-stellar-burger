@@ -20,7 +20,7 @@ export function RememberPassword() {
         navigate("/login");
     };
 
-    const rememberPassword = async (e) => {
+    const onSubmit = async (e) => {
         e.preventDefault();
         await dispatch(requestRememberPassword(form.email));
         navigate("/reset-password")
@@ -28,7 +28,7 @@ export function RememberPassword() {
 
 
     return (
-        <form className={style.main}>
+        <form className={style.main} onSubmit={onSubmit}>
             <h2 className="text text_type_main-large">Восстановление пароля</h2>
             <div className="mt-6">
                 <Input
@@ -38,13 +38,13 @@ export function RememberPassword() {
                     name={"email"}
                     onChange={onChange}
                     autoComplete="email"
+                    required
                 />
             </div>
             <Button extraClass="mt-6"
-                htmlType="button"
+                htmlType="submit"
                 type="primary"
                 size="medium"
-                onClick={rememberPassword}
             >
                 Восстановить
             </Button>
