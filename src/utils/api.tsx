@@ -1,6 +1,10 @@
 import { BASE_URL } from "../services/constants";
 //
-export function checkResponse(res) {
+type TErrorResponse = {
+  message: string;
+  success: boolean;
+}
+export function checkResponse<T>(res: Response): Promise<T> {
   if (res.ok) {
     return res.json();
   }
@@ -8,27 +12,27 @@ export function checkResponse(res) {
 };
 //
 
-const handleResponse = (res) => {
+const handleResponse = (res: Response) => {
   if (res.ok) {
     return res.json();
   }
   return res.json().then((err) => Promise.reject(err));
 };
 
-const checkSuccess = (res) => {
+const checkSuccess = (res: any) => {
   if (res.success) {
     return res;
   }
   return Promise.reject(res);
 };
 
-const request = (path, options) => {
+const request = (path: string, options: RequestInit) => {
   return fetch(`${BASE_URL}${path}`, options)
     .then(handleResponse)
     .then(checkSuccess);
 };
 
-const requestWithTokenRefresh = (path, options) => {
+const requestWithTokenRefresh = (path: string, options: any) => {
   return request(path, options).catch((err) => {
     if (err.message === "jwt expired") {
       return refreshToken().then((tokenResponse) => {

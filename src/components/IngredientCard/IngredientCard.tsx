@@ -1,15 +1,14 @@
 import cardStyle from "../IngredientCard/IngredientCard.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import PropTypes from "prop-types";
-import { ingredientPropType } from '../../utils/prop-types'
+import {TIngredient} from "../../utils/prop-types";
 import { useDispatch, useSelector } from "react-redux";
 import { useDrag } from "react-dnd";
-import { useLocation, useNavigate } from "react-router-dom";
+import {Link, useLocation, useNavigate} from "react-router-dom";
 
 
-export default function IngredientCard({ item }) {
+const IngredientCard = ({ item }: {item: TIngredient}) => {
     const dispatch = useDispatch();
-    const { bun, notBuns } = useSelector((state) => state.burgerFilling);
+    const { bun, notBuns } = useSelector((state: any) => state.burgerFilling);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -27,17 +26,17 @@ export default function IngredientCard({ item }) {
         if (item.type === "bun") {
             return bun._id === item._id ? 2 : 0;
         }
-        return notBuns.filter((i) => i._id === item._id).length;
+        return notBuns.filter((i: TIngredient) => i._id === item._id).length;
     });
 
 
 
     return (
-        <div to={`/ingredients/${item._id}`} state={{ background: location }} className={`${cardStyle.card} mb-10`} onClick={openIngredientDetailsHandler} >
+        <div className={`${cardStyle.card} mb-10`} onClick={openIngredientDetailsHandler} >
             <img src={item.image} alt={item.name} draggable ref={dragRef} />
             <div className={`${cardStyle.price} mt-1`}>
                 <p className="text text_type_main-default mr-2">{item.price}</p>
-                <CurrencyIcon />
+                <CurrencyIcon type={'primary'} />
             </div>
             <p className={`${cardStyle.name} text text_type_main-default mt-1`}>
                 {item.name}
@@ -47,6 +46,4 @@ export default function IngredientCard({ item }) {
     );
 }
 
-IngredientCard.propTypes = {
-    item: ingredientPropType,
-};
+export default IngredientCard;

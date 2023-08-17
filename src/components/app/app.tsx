@@ -31,7 +31,7 @@ import {
 
 function App() {
     const dispatch = useDispatch();
-    const order = useSelector((state) => state.order.orderData);
+    const order = useSelector((state: any) => state.order.orderData);
     const location = useLocation();
     const navigate = useNavigate();
     const background = location.state && location.state.background;

@@ -1,20 +1,27 @@
-import React, { useRef, useState, useMemo, useEffect } from "react";
+import React, {useRef, useState, useMemo, useEffect, FC} from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientsStyles from "./BurgerIngredients.module.css";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import { useSelector, } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import Preloader from "../Preloader/Preloader";
+import {TIngredient} from "../../utils/prop-types";
 
-export default function BurgerIngredients() {
-    const data = useSelector((state) => state.ingredients.ingredients);
-    const [current, setCurrent] = useState("bun");
+const BurgerIngredients: FC = () => {
+    const data = useSelector((state: any) => state.ingredients.ingredients);
+    const [current, setCurrent] = useState<"bun" | "sauce" | "main">("bun");
     const [loading, setLoading] = useState(true);
 
-    const sectionRefs = {
-        bun: useRef(null),
-        sauce: useRef(null),
-        main: useRef(null),
+    type TSectionRefs = {
+        bun: React.RefObject<HTMLParagraphElement>;
+        sauce: React.RefObject<HTMLParagraphElement>;
+        main: React.RefObject<HTMLParagraphElement>;
+    };
+
+    const sectionRefs: TSectionRefs = {
+        bun: useRef<HTMLParagraphElement>(null),
+        sauce: useRef<HTMLParagraphElement>(null),
+        main: useRef<HTMLParagraphElement>(null),
     };
 
     const { ref: bunRef, inView: bunInView } = useInView();
@@ -22,24 +29,27 @@ export default function BurgerIngredients() {
     const { ref: mainRef, inView: mainInView } = useInView();
 
     const { buns, sauces, main } = useMemo(() => {
-        const buns = data.filter((item) => item.type === "bun");
-        const sauces = data.filter((item) => item.type === "sauce");
-        const main = data.filter((item) => item.type === "main");
+        const buns = data.filter((item: TIngredient) => item.type === "bun");
+        const sauces = data.filter((item: TIngredient) => item.type === "sauce");
+        const main = data.filter((item: TIngredient) => item.type === "main");
+
 
         return { buns, sauces, main };
     }, [data]);
 
-    const handleTabClick = (type) => {
+    const handleTabClick = (type: "bun" | "sauce" | "main") => {
         setCurrent(type);
         scrollToSection(type);
     };
 
-    const scrollToSection = (type) => {
+    const scrollToSection = (type: "bun" | "sauce" | "main") => {
         const sectionRef = sectionRefs[type].current;
-        sectionRef.scrollIntoView({
-            behavior: "smooth",
-            block: "start"
-        });
+        if (sectionRef) {
+            sectionRef.scrollIntoView({
+                behavior: "smooth",
+                block: "start"
+            });
+        }
     };
 
     useEffect(() => {
@@ -74,9 +84,9 @@ export default function BurgerIngredients() {
                 {componentData.map((tab) => (
                     <Tab
                         key={tab.type}
-                        type={tab.type}
+                        value={tab.type as "bun" | "sauce" | "main"}
                         active={current === tab.type}
-                        onClick={() => handleTabClick(tab.type)}
+                        onClick={() => handleTabClick(tab.type as "bun" | "sauce" | "main")}
                     >
                         {tab.title}
                     </Tab>))}
@@ -86,12 +96,12 @@ export default function BurgerIngredients() {
             ) : (
                 <section className={ingredientsStyles.section}>
                     {componentData.map((tab) => (
-                        <div key={tab.type} ref={sectionRefs[tab.type]}>
+                        <div key={tab.type} ref={sectionRefs[tab.type as "bun" | "sauce" | "main"]}>
                             <h3 className="text text_type_main-medium mb-6 mt-10">{tab.title}</h3>
                             <div className={ingredientsStyles.cardList}
                                 ref={tab.type === 'bun' ? bunRef :
                                     tab.type === 'sauce' ? sauceRef : mainRef}>
-                                {tab.data.map((item) => (
+                                {tab.data.map((item: TIngredient) => (
                                     <IngredientCard
                                         item={item}
                                         key={item._id}
@@ -107,3 +117,4 @@ export default function BurgerIngredients() {
     );
 }
 
+export default BurgerIngredients;

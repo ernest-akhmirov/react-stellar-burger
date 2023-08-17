@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import style from "./style.module.css";
 import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate } from "react-router-dom";
@@ -11,7 +11,7 @@ export function RegistrationPage() {
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useDispatch();
 
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
@@ -19,7 +19,7 @@ export function RegistrationPage() {
         navigate("/login");
     };
 
-    const onSubmit = (e) => {
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         e.preventDefault();
         dispatch(register(form));
     };

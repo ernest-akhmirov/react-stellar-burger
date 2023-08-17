@@ -1,12 +1,19 @@
 import { useDrag, useDrop } from "react-dnd";
-import { useRef } from "react";
+import React, {FC, ReactElement, useRef} from "react";
 
-const DraggableConstructorElement = ({ id, index, moveItem, children }) => {
-  const ref = useRef(null);
+
+type TDraggableConstructorElementProps = {
+  id: string;
+  index: number;
+  moveItem: (dragIndex: number, hoverIndex: number,) => void;
+  children: ReactElement;
+}
+const DraggableConstructorElement: FC<TDraggableConstructorElementProps> = ({ id, index, moveItem, children }) => {
+  const ref = useRef<HTMLDivElement | null>(null);
 
   const [, drop] = useDrop({
     accept: "constructorElement",
-    hover(item) {
+    hover(item: {index: number}): void {
       if (!ref.current) {
         return;
       }

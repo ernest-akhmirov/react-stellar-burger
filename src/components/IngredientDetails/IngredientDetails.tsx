@@ -1,14 +1,14 @@
-import React from "react";
+import React, {FC} from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
 import { useSelector } from "react-redux";
 import { useParams } from "react-router";
+import {TIngredient} from "../../utils/prop-types";
 
-
-export default function IngredientDetails() {
+const IngredientDetails: FC = () => {
     const { id } = useParams()
 
-    const ingredients = useSelector((state) => state.ingredients.ingredients);
-    const item = ingredients.find((el) => el._id === id);
+    const ingredients = useSelector((state: any) => state.ingredients.ingredients);
+    const item: TIngredient = ingredients.find((el:TIngredient) => el._id === id);
 
     if (!item) {
         return (
@@ -49,3 +49,4 @@ export default function IngredientDetails() {
     );
 }
 
+export default IngredientDetails;
