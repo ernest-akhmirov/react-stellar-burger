@@ -1,24 +1,27 @@
 import constuctorStyle from '../BurgerConstructor/BurgerConstructor.module.css';
 import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
-import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement'; 
+import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement';
 import { useSelector, useDispatch } from 'react-redux';
 import { addBurgerIngredient, removeBurgedIngredient, moveNotBunsIngredient } from '../../services/actions/burgerConstructorActions';
-import { placeOrder } from '../../services/actions/orderActions'; 
+import { placeOrder } from '../../services/actions/orderActions';
 import { useDrop } from 'react-dnd';
 import { useMemo } from 'react';
+import {useNavigate} from "react-router-dom";
+
 
 
 export default function BurgerConstructor() {
   const dispatch = useDispatch();
-
+  const navigate = useNavigate()
   const bun = useSelector((state) => state.burgerFilling.bun);
   const notBuns = useSelector((state) => state.burgerFilling.notBuns);
+  const isAuthorized = useSelector((state) => state.authReducer.isAuthorized);
 
   const ingredientsList = notBuns.map((item) => item._id);
   ingredientsList.unshift(bun._id);
 
-  function onClick() {
-    dispatch(placeOrder(ingredientsList));
+  const makeOrder= () => {
+    isAuthorized ? dispatch(placeOrder(ingredientsList)) : navigate("/login")
   }
 
   const [, dropRef] = useDrop({
@@ -96,7 +99,7 @@ export default function BurgerConstructor() {
               <p className='text text_type_digits-medium pr-3'>{totalCost}</p>
               <CurrencyIcon type='primary' />
             </div>
-            <Button htmlType='button' type='primary' size='medium' onClick={onClick}>
+            <Button htmlType='button' type='primary' size='medium' onClick={makeOrder}>
               Оформить заказ
             </Button>
           </div>

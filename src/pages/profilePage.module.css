@@ -1,0 +1,34 @@
+.wrapper {
+    display: flex;
+    width: 1280px;
+    margin: 120px auto 0;
+  }
+  
+  .nav {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .link {
+    display: flex;
+    align-items: center;
+    width: 320px;
+    height: 64px;
+    text-decoration: none;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .active {
+    color: white;
+  }
+  
+  .link:active {
+    color: inherit;
+  }
+  
+  .description {
+    width: 320px;
+    color: #404052;
+  }
+  

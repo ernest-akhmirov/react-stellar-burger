@@ -21,3 +21,12 @@ export const PLACE_ORDER_ERROR = "PLACE_ORDER_ERROR";
 export const CLOSE_ORDER_DETAILS = "CLOSE_ORDER_DETAILS";
 
 export const BASE_URL = "https://norma.nomoreparties.space/api/";
+
+// Auth
+export const PASSWORD_RESET_PENDING = "PASSWORD_RESET_PENDING"
+export const CLEAR_PASSWORD_RESET = "CLEAR_PASSWORD_RESET"
+export const REGISTER_USER = "REGISTER_USER";
+export const LOGIN_USER = "LOGIN_USER";
+export const SET_USER = "SET_USER";
+export const UPDATE_USER = "UPDATE_USER";
+export const LOGOUT_USER = "LOGOUT_USER";
