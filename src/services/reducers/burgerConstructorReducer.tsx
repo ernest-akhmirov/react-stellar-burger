@@ -14,7 +14,7 @@ type TBurgerConstructorState = {
 };
 
 const initialState: TBurgerConstructorState = {
-    bun: {} ,
+    bun: {},
     notBuns: [],
 };
 
