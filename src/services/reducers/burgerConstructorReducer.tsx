@@ -5,13 +5,20 @@ import {
 } from "../constants";
 
 import update from "immutability-helper";
+import {TIngredient} from "../../utils/types";
+import {TBurgerConstructorActions} from "../actions/burgerConstructorActions";
 
-const initialState = {
-    bun: {},
+type TBurgerConstructorState = {
+    bun: {} | TIngredient;
+    notBuns: TIngredient[];
+};
+
+const initialState: TBurgerConstructorState = {
+    bun: {} ,
     notBuns: [],
 };
 
-export const burgerConstructorReducer = (state = initialState, action) => {
+export const burgerConstructorReducer = (state:TBurgerConstructorState = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
     switch (action.type) {
         case ADD_BURGER_INGREDIENT: {
             if (action.ingredient.type === "bun") {

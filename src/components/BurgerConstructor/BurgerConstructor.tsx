@@ -3,22 +3,22 @@ import {ConstructorElement, DragIcon, CurrencyIcon, Button} from '@ya.praktikum/
 import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement';
 import {
     addBurgerIngredient,
-    removeBurgedIngredient,
+    removeBurgerIngredient,
     moveNotBunsIngredient
 } from '../../services/actions/burgerConstructorActions';
 import {placeOrder} from '../../services/actions/orderActions';
 import {useDrop} from 'react-dnd';
 import {useMemo, FC} from 'react';
 import {useNavigate} from "react-router-dom";
-import {TIngredient} from "../../utils/types";
+import {RootState, TIngredient} from "../../utils/types";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 
 const BurgerConstructor: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate()
-    const bun: TIngredient = useAppSelector((state: any) => state.burgerFilling.bun);
-    const notBuns: Array<TIngredient> = useAppSelector((state: any) => state.burgerFilling.notBuns);
-    const isAuthorized: boolean = useAppSelector((state: any) => state.authReducer.isAuthorized);
+    const bun: {} | TIngredient = useAppSelector((state: RootState) => state.burgerFilling.bun);
+    const notBuns: TIngredient[] = useAppSelector((state: RootState) => state.burgerFilling.notBuns);
+    const isAuthorized: boolean = useAppSelector((state: RootState) => state.authReducer.isAuthorized);
 
     const ingredientsList: string[] = notBuns.map((item) => item._id);
     ingredientsList.unshift(bun._id);
@@ -29,7 +29,7 @@ const BurgerConstructor: FC = () => {
 
     const [, dropRef] = useDrop({
         accept: 'filler',
-        drop(item) {
+        drop(item: any) {
             dispatch(addBurgerIngredient(item));
         },
     });
@@ -82,7 +82,7 @@ const BurgerConstructor: FC = () => {
                                         text={item.name}
                                         price={item.price}
                                         thumbnail={item.image_mobile}
-                                        handleClose={() => dispatch(removeBurgedIngredient(item.additionalId))}
+                                        handleClose={() => dispatch(removeBurgerIngredient(item.additionalId || ''))}
                                     />
                                 </div>
                             </DraggableConstructorElement>
