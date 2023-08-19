@@ -1,22 +1,22 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import style from "./style.module.css";
 import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate, Navigate} from "react-router-dom";
-import {useDispatch, useSelector,} from 'react-redux';
 import { requestResetPassword } from '../services/actions/authActions';
+import {useAppDispatch, useAppSelector} from "../utils/hooks";
 
 
 export function ResetPasswordPage() {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [form, setValue] = useState(() => ({  password: "", code: "" }));
     const [showPassword, setShowPassword] = useState(false);
-    const isRememberVisited = useSelector((state) => state.authReducer.isPasswordResetPending);
+    const isRememberVisited = useAppSelector((state: any) => state.authReducer.isPasswordResetPending);
 
     if (!isRememberVisited) {
         return <Navigate to="/forgot-password" replace={true} />;
     }
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
@@ -24,7 +24,7 @@ export function ResetPasswordPage() {
         navigate("/login");
     };
     
-    const onSubmit = (e) =>{
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>):void =>{
         console.log('установлен новый пароль')
         e.preventDefault();
         dispatch(requestResetPassword(form.password, form.code));

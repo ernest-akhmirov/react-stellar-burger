@@ -1,35 +1,36 @@
-import { useEffect, useState } from "react";
+import React, {SyntheticEvent, useEffect, useState} from "react";
 import {
 	Input,
 	Button,
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import style from "./profileUser.module.css";
-import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../services/actions/authActions";
+import {useAppDispatch, useAppSelector} from "../utils/hooks";
+
 
 export function ProfileUser() {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const [form, setValue] = useState({
 		name: "",
 		password: "",
 		email: "",
 	});
-	const user = useSelector((store) => store.authReducer.user);
+	const user = useAppSelector((store: any) => store.authReducer.user);
 	useEffect(() => {
 		setValue(user);
 	}, [user]);
 
 
-	const onChange = (e) => {
+	const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
 		setValue({ ...form, [e.target.name]: e.target.value });
 	};
-	const handleReset = (e) => {
+	const handleReset = (e: SyntheticEvent<Element, Event>): void => {
 		setValue(user);
 	}
 
-	const onSubmit = (e) => {
+	const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
 		dispatch(updateUser(form));
 	}

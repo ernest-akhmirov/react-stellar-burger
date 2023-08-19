@@ -10,7 +10,7 @@ import thunk from "redux-thunk";
 import { composeWithDevTools } from "redux-devtools-extension";
 import {BrowserRouter} from 'react-router-dom';
 
-const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk)));
 
 ReactDOM.render(
     <React.StrictMode>

@@ -1,6 +1,5 @@
 import styles from "./app.module.css";
 import { useEffect, } from "react";
-import { useDispatch, useSelector } from "react-redux";
 import AppHeader from "../AppHeader/AppHeader";
 import Main from "../Main/Main";
 import Modal from "../Modal/Modal";
@@ -28,10 +27,11 @@ import {
     OnlyUnauthenticated,
     OnlyAuthenticated,
 } from "../ProtectedRoute/ProtectedRoute";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 
 function App() {
-    const dispatch = useDispatch();
-    const order = useSelector((state) => state.order.orderData);
+    const dispatch = useAppDispatch();
+    const order = useAppSelector((state) => state.order.orderData);
     const location = useLocation();
     const navigate = useNavigate();
     const background = location.state && location.state.background;

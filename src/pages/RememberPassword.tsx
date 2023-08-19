@@ -1,18 +1,18 @@
-import { useState } from 'react';
+import React, { useState } from 'react';
 import style from "./style.module.css";
 import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate,  } from "react-router-dom";
-import { useDispatch,  } from 'react-redux';
 import { requestRememberPassword } from '../services/actions/authActions';
+import {useAppDispatch} from "../utils/hooks";
 
 
 export function RememberPassword() {
     const navigate = useNavigate();
     const [form, setValue] = useState(() => ({ email: "", }));
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
 
 
-    const onChange = (e) => {
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
@@ -20,7 +20,7 @@ export function RememberPassword() {
         navigate("/login");
     };
 
-    const onSubmit = async (e) => {
+    const onSubmit = async (e: React.FormEvent<HTMLFormElement>): Promise<void> => {
         e.preventDefault();
         await dispatch(requestRememberPassword(form.email));
         navigate("/reset-password")

@@ -18,7 +18,7 @@ export const removeBurgedIngredient = (additionalId) => ({
     additionalId: additionalId,
   });
 
-  export const moveNotBunsIngredient = (dragIndex, hoverIndex) => ({
+  export const moveNotBunsIngredient = (dragIndex, hoverIndex, ) => ({
     type: MOVE_NOTBUNS_INGREDIENT,
-    payload: { dragIndex, hoverIndex },
+    payload: { dragIndex, hoverIndex, },
   });

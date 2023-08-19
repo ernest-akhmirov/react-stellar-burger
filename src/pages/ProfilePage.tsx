@@ -1,14 +1,14 @@
 import { NavLink, Outlet, useLocation } from "react-router-dom";
 import style from "./profilePage.module.css";
-import { useDispatch } from "react-redux";
 import { logout } from "../services/actions/authActions";
+import {useAppDispatch} from "../utils/hooks";
 
 
 const styleActive = `${style.link} ${style.active} text text_type_main-medium`;
 const styleInactive = `${style.link} text text_type_main-medium text_color_inactive`;
 
 export function ProfilePage() {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const location = useLocation();
 
     const handleNavLinkClick = () => {
