@@ -1,7 +1,6 @@
 import constructorStyle from '../BurgerConstructor/BurgerConstructor.module.css';
 import {ConstructorElement, DragIcon, CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement';
-import {useSelector, useDispatch} from 'react-redux';
 import {
     addBurgerIngredient,
     removeBurgedIngredient,
@@ -11,14 +10,15 @@ import {placeOrder} from '../../services/actions/orderActions';
 import {useDrop} from 'react-dnd';
 import {useMemo, FC} from 'react';
 import {useNavigate} from "react-router-dom";
-import {TIngredient} from "../../utils/prop-types";
+import {TIngredient} from "../../utils/types";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 
 const BurgerConstructor: FC = () => {
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const navigate = useNavigate()
-    const bun: TIngredient = useSelector((state: any) => state.burgerFilling.bun);
-    const notBuns: Array<TIngredient> = useSelector((state: any) => state.burgerFilling.notBuns);
-    const isAuthorized: boolean = useSelector((state: any) => state.authReducer.isAuthorized);
+    const bun: TIngredient = useAppSelector((state: any) => state.burgerFilling.bun);
+    const notBuns: Array<TIngredient> = useAppSelector((state: any) => state.burgerFilling.notBuns);
+    const isAuthorized: boolean = useAppSelector((state: any) => state.authReducer.isAuthorized);
 
     const ingredientsList: string[] = notBuns.map((item) => item._id);
     ingredientsList.unshift(bun._id);

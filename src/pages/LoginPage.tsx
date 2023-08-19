@@ -2,8 +2,8 @@ import {useState, useEffect, FormEvent, ChangeEvent,} from 'react';
 import style from "./style.module.css";
 import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
 import { useNavigate, } from "react-router-dom";
-import { useDispatch, useSelector, } from 'react-redux';
 import { login } from '../services/actions/authActions';
+import {useAppDispatch, useAppSelector} from "../utils/hooks";
 
 type TFormValue = {
     email: string;
@@ -11,7 +11,7 @@ type TFormValue = {
 }
 export const LoginPage = () => {
     const navigate = useNavigate();
-    const dispatch = useDispatch();
+    const dispatch = useAppDispatch();
     const [form, setValue] = useState(() => ({ email: "", password: "" }));
     const [showPassword, setShowPassword] = useState(false);
 
@@ -19,7 +19,7 @@ export const LoginPage = () => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
-    const isAuthorized = useSelector((store: any) => store.authReducer.isAuthorized);
+    const isAuthorized = useAppSelector((store: any) => store.authReducer.isAuthorized);
 
     const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();

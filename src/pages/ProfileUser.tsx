@@ -5,19 +5,19 @@ import {
 } from "@ya.praktikum/react-developer-burger-ui-components";
 
 import style from "./profileUser.module.css";
-import { useDispatch, useSelector } from "react-redux";
 import { updateUser } from "../services/actions/authActions";
+import {useAppDispatch, useAppSelector} from "../utils/hooks";
 
 
 export function ProfileUser() {
-	const dispatch = useDispatch();
+	const dispatch = useAppDispatch();
 
 	const [form, setValue] = useState({
 		name: "",
 		password: "",
 		email: "",
 	});
-	const user = useSelector((store: any) => store.authReducer.user);
+	const user = useAppSelector((store: any) => store.authReducer.user);
 	useEffect(() => {
 		setValue(user);
 	}, [user]);

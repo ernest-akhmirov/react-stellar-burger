@@ -2,13 +2,13 @@ import React, {useRef, useState, useMemo, useEffect, FC} from "react";
 import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientsStyles from "./BurgerIngredients.module.css";
 import IngredientCard from "../IngredientCard/IngredientCard";
-import { useSelector, } from "react-redux";
 import { useInView } from "react-intersection-observer";
 import Preloader from "../Preloader/Preloader";
-import {TIngredient} from "../../utils/prop-types";
+import {TIngredient} from "../../utils/types";
+import {useAppSelector} from "../../utils/hooks";
 
 const BurgerIngredients: FC = () => {
-    const data = useSelector((state: any) => state.ingredients.ingredients);
+    const data = useAppSelector((state: any) => state.ingredients.ingredients);
     const [current, setCurrent] = useState<"bun" | "sauce" | "main">("bun");
     const [loading, setLoading] = useState(true);
 

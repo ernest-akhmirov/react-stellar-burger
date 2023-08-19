@@ -1,14 +1,14 @@
 import cardStyle from "../IngredientCard/IngredientCard.module.css";
 import { CurrencyIcon, Counter } from "@ya.praktikum/react-developer-burger-ui-components";
-import {TIngredient} from "../../utils/prop-types";
-import { useDispatch, useSelector } from "react-redux";
+import {TIngredient} from "../../utils/types";
 import { useDrag } from "react-dnd";
-import {Link, useLocation, useNavigate} from "react-router-dom";
+import { useLocation, useNavigate} from "react-router-dom";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 
 
 const IngredientCard = ({ item }: {item: TIngredient}) => {
-    const dispatch = useDispatch();
-    const { bun, notBuns } = useSelector((state: any) => state.burgerFilling);
+    const dispatch = useAppDispatch();
+    const { bun, notBuns } = useAppSelector((state: any) => state.burgerFilling);
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -22,7 +22,7 @@ const IngredientCard = ({ item }: {item: TIngredient}) => {
     });
 
 
-    const count = useSelector((state) => {
+    const count = useAppSelector((state) => {
         if (item.type === "bun") {
             return bun._id === item._id ? 2 : 0;
         }

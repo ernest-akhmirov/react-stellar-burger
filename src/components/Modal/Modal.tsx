@@ -2,7 +2,6 @@ import { useEffect, FC, PropsWithChildren } from "react";
 import ReactDOM from "react-dom";
 import { CloseIcon } from "@ya.praktikum/react-developer-burger-ui-components";
 import modalStyle from "../Modal/Modal.module.css";
-import PropTypes from "prop-types";
 import ModalOverlay from "../ModalOverlay/ModalOverlay";
 
 const modalRoot = document.getElementById("modal") as HTMLElement;
