@@ -4,22 +4,19 @@ import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-componen
 import { useNavigate, } from "react-router-dom";
 import { login } from '../services/actions/authActions';
 import {useAppDispatch, useAppSelector} from "../utils/hooks";
+import {RootState} from "../utils/types";
 
-type TFormValue = {
-    email: string;
-    password: string;
-}
 export const LoginPage = () => {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [form, setValue] = useState(() => ({ email: "", password: "" }));
+    const [form, setValue] = useState(() => ({ email: "", password: "", name: "" }));
     const [showPassword, setShowPassword] = useState(false);
 
     const onChange = (e: ChangeEvent<HTMLInputElement>): void => {
         setValue({ ...form, [e.target.name]: e.target.value });
     };
 
-    const isAuthorized = useAppSelector((store: any) => store.authReducer.isAuthorized);
+    const isAuthorized = useAppSelector((store: RootState) => store.authReducer.isAuthorized);
 
     const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();

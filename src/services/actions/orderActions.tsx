@@ -6,7 +6,15 @@ import {
     BASE_URL
 } from "../constants";
 import {checkResponse} from "../../utils/api";
-import {AppDispatch, TIngredient} from "../../utils/types";
+import {AppDispatch,} from "../../utils/types";
+
+export type TOrderData = {
+    success: boolean;
+    name: string;
+    order: {
+        number: number;
+    };
+}
 
 type TPlaceOrderRequestAction = {
     type: typeof PLACE_ORDER_REQUEST,
@@ -14,7 +22,7 @@ type TPlaceOrderRequestAction = {
 
 type TPlaceOrderSuccessAction = {
     type: typeof PLACE_ORDER_SUCCESS;
-    orderData: TIngredient[];
+    orderData: TOrderData;
 }
 
 type TPlaceOrderError = {
@@ -34,7 +42,7 @@ export const placeOrderRequest = (): TPlaceOrderRequestAction => ({
     type: PLACE_ORDER_REQUEST,
 });
 
-export const placeOrderSuccess = (orderData: TIngredient[]): TPlaceOrderSuccessAction => ({
+export const placeOrderSuccess = (orderData: TOrderData): TPlaceOrderSuccessAction => ({
     type: PLACE_ORDER_SUCCESS,
     orderData,
 });
@@ -59,7 +67,7 @@ export const placeOrder = (ingredientsIds: string[]) => {
                 },
                 body: JSON.stringify({ingredients: ingredientsIds}),
             });
-            const orderData: TIngredient[] = await checkResponse(res);
+            const orderData: TOrderData = await checkResponse(res);
             dispatch(placeOrderSuccess(orderData));
         } catch (error) {
             dispatch(placeOrderError());

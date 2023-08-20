@@ -11,7 +11,7 @@ export const rootReducer = combineReducers({
     selectedIngredient: ingredientDetailsReducer,
     burgerFilling: burgerConstructorReducer,
     order: orderReducer,
-    authReducer,
+    authReducer: authReducer,
  
 });
 

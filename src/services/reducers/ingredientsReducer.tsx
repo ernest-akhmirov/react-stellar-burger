@@ -18,7 +18,7 @@ const initialState: TIngredientsState = {
     ingredientsFailed: false,
 };
 
-export const ingredientsReducer = (state: TIngredientsState = initialState, action: TIngredientsActions) => {
+export const ingredientsReducer = (state = initialState, action: TIngredientsActions): TIngredientsState => {
     switch (action.type) {
         case GET_INGREDIENTS_REQUEST: {
             return {

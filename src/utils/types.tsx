@@ -1,7 +1,13 @@
-
 import {store} from "../index";
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+import {rootReducer} from "../services/reducers/rootReducer";
+import {AppActions, AppThunk} from "../services/actions/authActions";
+
+
+export type RootState = ReturnType<typeof rootReducer>;
+// export type AppDispatch = typeof store.dispatch;
+export type AppDispatch<TReturnType = void> = (
+    action: AppActions | AppThunk<TReturnType>
+) => TReturnType;
 export type DispatchFunc = () => AppDispatch;
 
 export type TIngredient = {
@@ -20,3 +26,5 @@ export type TIngredient = {
         additionalId?: string;
         index?: number;
 };
+
+

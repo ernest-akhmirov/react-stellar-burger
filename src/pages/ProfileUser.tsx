@@ -7,19 +7,22 @@ import {
 import style from "./profileUser.module.css";
 import { updateUser } from "../services/actions/authActions";
 import {useAppDispatch, useAppSelector} from "../utils/hooks";
-
+import {RootState} from "../utils/types";
 
 export function ProfileUser() {
 	const dispatch = useAppDispatch();
 
 	const [form, setValue] = useState({
 		name: "",
-		password: "",
 		email: "",
+		password: "",
 	});
-	const user = useAppSelector((store: any) => store.authReducer.user);
+	const user = useAppSelector((store: RootState) => store.authReducer.user);
+
 	useEffect(() => {
-		setValue(user);
+		if (user) {
+			setValue((prevForm) => ({ ...prevForm, ...user }));
+		}
 	}, [user]);
 
 
@@ -27,8 +30,10 @@ export function ProfileUser() {
 		setValue({ ...form, [e.target.name]: e.target.value });
 	};
 	const handleReset = (e: SyntheticEvent<Element, Event>): void => {
-		setValue(user);
-	}
+		if (user) {
+			setValue((prevForm) => ({ ...prevForm, ...user }));
+		}
+	};
 
 	const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
 		e.preventDefault();
@@ -68,7 +73,7 @@ export function ProfileUser() {
 				type={"password"}
 				placeholder={"Пароль"}
 				icon={"EditIcon"}
-				value={form.password || ""}
+				value={form.password}
 				name={"password"}
 				error={false}
 				errorText={"Ошибка"}

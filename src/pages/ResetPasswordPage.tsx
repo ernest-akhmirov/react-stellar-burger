@@ -4,6 +4,7 @@ import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-componen
 import { useNavigate, Navigate} from "react-router-dom";
 import { requestResetPassword } from '../services/actions/authActions';
 import {useAppDispatch, useAppSelector} from "../utils/hooks";
+import {RootState} from "../utils/types";
 
 
 export function ResetPasswordPage() {
@@ -11,7 +12,7 @@ export function ResetPasswordPage() {
     const dispatch = useAppDispatch();
     const [form, setValue] = useState(() => ({  password: "", code: "" }));
     const [showPassword, setShowPassword] = useState(false);
-    const isRememberVisited = useAppSelector((state: any) => state.authReducer.isPasswordResetPending);
+    const isRememberVisited = useAppSelector((state: RootState) => state.authReducer.isPasswordResetPending);
 
     if (!isRememberVisited) {
         return <Navigate to="/forgot-password" replace={true} />;

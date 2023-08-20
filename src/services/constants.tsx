@@ -30,23 +30,4 @@ export const SET_USER: "SET_USER" = "SET_USER";
 export const UPDATE_USER: "UPDATE_USER" = "UPDATE_USER";
 export const LOGOUT_USER: "LOGOUT_USER" = "LOGOUT_USER";
 
-export type TActionType =
-    | typeof GET_INGREDIENTS_REQUEST
-    | typeof GET_INGREDIENTS_SUCCESS
-    | typeof GET_INGREDIENTS_ERROR
-    | typeof OPEN_INGREDIENT_DETAILS
-    | typeof CLOSE_INGREDIENT_DETAILS
-    | typeof ADD_BURGER_INGREDIENT
-    | typeof REMOVE_BURGER_INGREDIENT
-    | typeof MOVE_NOTBUNS_INGREDIENT
-    | typeof PLACE_ORDER_REQUEST
-    | typeof PLACE_ORDER_SUCCESS
-    | typeof PLACE_ORDER_ERROR
-    | typeof CLOSE_ORDER_DETAILS
-    | typeof PASSWORD_RESET_PENDING
-    | typeof CLEAR_PASSWORD_RESET
-    | typeof REGISTER_USER
-    | typeof LOGIN_USER
-    | typeof SET_USER
-    | typeof UPDATE_USER
-    | typeof LOGOUT_USER;
+
