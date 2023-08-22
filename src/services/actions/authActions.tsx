@@ -15,6 +15,8 @@ import {TBurgerConstructorActions} from "./burgerConstructorActions";
 import {TIngredientsActions} from "./ingredientsActions";
 import {TIngredientsDetailActions} from "./ingredientsDetailsActions";
 import {TOrderActions} from "./orderActions";
+import {TWSActions} from "./WSActions";
+import {Action, ActionCreator} from "redux";
 
 export type AppActions =
     | TBurgerConstructorActions
@@ -22,6 +24,7 @@ export type AppActions =
     | TIngredientsDetailActions
     | TOrderActions
     | TAuthActions
+    | TWSActions
     ;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -30,6 +33,8 @@ export type AppThunk<ReturnType = void> = ThunkAction<
     unknown,
     AppActions
 >;
+
+
 export type TUserType = {
     email: string;
     name: string;

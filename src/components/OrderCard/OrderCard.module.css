@@ -1,0 +1,72 @@
+.orderCard {
+    width: 584px;
+    border-radius: 40px;
+    background: #1c1c21;
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+    box-sizing: border-box;
+    padding: 24px;
+    margin-bottom: 24px;
+}
+
+.orderCardHeader {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.orderBurgerName {
+    text-align: left;
+    margin: 0;
+}
+.orderFooter {
+    display:flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.orderPrice {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}
+
+.image {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background:
+            linear-gradient(#000, #000) padding-box,
+            linear-gradient(to left, #4c4cff, #801ab2) border-box;
+    border: 2px solid transparent;
+    margin-right: -15px;
+    position: relative;
+}
+.orderIngredients {
+    display: flex;
+    flex-direction: row-reverse;
+}
+.count {
+    display: flex;
+    position: absolute;
+    height: 64px;
+    width: 64px;
+    border-radius: 50%;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.7);
+}
+

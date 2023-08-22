@@ -30,14 +30,14 @@ export default function AppHeader() {
             </p>
           </NavLink>
           <NavLink
-            to="/orders"
+            to="/feed"
             className={styles.link}
           >
             <ListIcon
-              type={location.pathname === '/orders' ? 'primary' : 'secondary'}
+              type={location.pathname === '/feed' ? 'primary' : 'secondary'}
             />
             <p
-              className={`text text_type_main-default ${location.pathname === '/orders' ? '' : 'text_color_inactive'
+              className={`text text_type_main-default ${location.pathname === '/feed' ? '' : 'text_color_inactive'
                 } ml-2`}
             >
               Лента заказов

@@ -28,6 +28,7 @@ import {
     OnlyAuthenticated,
 } from "../ProtectedRoute/ProtectedRoute";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
+import FeedPage from "../../pages/FeedPage";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -80,6 +81,7 @@ function App() {
                     <Route path="/profile/orders" element={<ProfileOrders />} />
                 </Route>
                 <Route path="/ingredients/:id" element={<IngredientPage />} />
+                <Route path="/feed" element={<FeedPage />}> </Route>
             </Routes>
             {background && (
                 <Routes>

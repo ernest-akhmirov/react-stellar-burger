@@ -8,7 +8,7 @@ import {TIngredient} from "../../utils/types";
 import {useAppSelector} from "../../utils/hooks";
 
 const BurgerIngredients: FC = () => {
-    const data = useAppSelector((state: any) => state.ingredients.ingredients);
+    const data = useAppSelector((state) => state.ingredients.ingredients);
     const [current, setCurrent] = useState<"bun" | "sauce" | "main">("bun");
     const [loading, setLoading] = useState(true);
 
