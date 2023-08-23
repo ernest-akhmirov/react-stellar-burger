@@ -8,8 +8,10 @@ import constructorStyle from "../components/BurgerConstructor/BurgerConstructor.
 
 function FeedPage() {
 
-    const {orders} = useAppSelector(store => ({
+    const {orders, total, totalToday} = useAppSelector(store => ({
         orders: store.wsReducer.orders,
+        total: store.wsReducer.total,
+        totalToday: store.wsReducer.totalToday,
     }));
 
     const dispatch = useAppDispatch();
@@ -62,9 +64,9 @@ function FeedPage() {
                         </div>
                     </div>
                     <p className={"text text_type_main-medium mt-15"}>Выполнено за все время:</p>
-                    <p className={`${styles.glow} text text_type_digits-large mt-6`}>123142</p>
+                    <p className={`${styles.glow} text text_type_digits-large mt-6`}>{total}</p>
                     <p className={"text text_type_main-medium mt-15"}>Выполнено за все время:</p>
-                    <p className={`${styles.glow} text text_type_digits-large mt-6`}>122</p>
+                    <p className={`${styles.glow} text text_type_digits-large mt-6`}>{totalToday}</p>
                 </section>
             </div>
         </main>
