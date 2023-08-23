@@ -22,6 +22,7 @@ import {ProfilePage} from "../../pages/ProfilePage";
 import {ProfileOrders} from "../../pages/ProfileOrders";
 import {ProfileUser} from "../../pages/ProfileUser";
 import {IngredientPage} from "../../pages/ingredientPage";
+import {ReadyOrderPage} from "../../pages/ReadyOrderPage";
 import {getUser} from "../../services/actions/authActions";
 import {
     OnlyUnauthenticated,
@@ -30,6 +31,7 @@ import {
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import FeedPage from "../../pages/FeedPage";
 import OrderDetails from "../OrderDetails/OrderDetails";
+import {WS_CONNECTION_START} from "../../services/constants";
 
 function App() {
     const dispatch = useAppDispatch();
@@ -44,6 +46,7 @@ function App() {
             dispatch(getUser());
         }
         dispatch(fetchIngredients());
+        dispatch({type: WS_CONNECTION_START, payload: `/all`});
     }, [dispatch]);
 
     const closeIngredientModal = () => {
@@ -83,7 +86,7 @@ function App() {
                 </Route>
                 <Route path="/ingredients/:id" element={<IngredientPage/>}/>
                 <Route path="/feed" element={<FeedPage/>}> </Route>
-                <Route path="/fees/:id" element={<ReadyOrderDetails/>}/>
+                <Route path="/feed/:id" element={<ReadyOrderPage/>}/>
             </Routes>
             {background && (
                 <Routes>
@@ -105,7 +108,6 @@ function App() {
                     />
                 </Routes>
             )}
-
             {order && (
                 <Modal closeModal={closeOrderModal}>
                     <OrderDetails order={order}/>

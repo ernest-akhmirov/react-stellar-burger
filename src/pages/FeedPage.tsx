@@ -13,15 +13,6 @@ function FeedPage() {
         total: store.wsReducer.total,
         totalToday: store.wsReducer.totalToday,
     }));
-
-    const dispatch = useAppDispatch();
-    useEffect(() => {
-        dispatch({type: WS_CONNECTION_START, payload: `/all`});
-        return () => {
-            dispatch({type: WS_CONNECTION_CLOSED, payload: ''})
-        };
-    }, [dispatch]);
-
     return (
         <main className={styles.wrapper}>
 

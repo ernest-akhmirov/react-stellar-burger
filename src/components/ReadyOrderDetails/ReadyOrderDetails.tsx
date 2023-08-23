@@ -2,7 +2,6 @@ import styles from "./ReadyOrderDetails.module.css"
 
 import {useParams} from "react-router";
 import {useAppSelector} from "../../utils/hooks";
-import {useEffect, useState} from "react";
 import {TIngredient} from "../../utils/types";
 import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
 
@@ -18,25 +17,22 @@ const today = new Date();
 //     };
 // }
 export default function ReadyOrderDetails() {
-    const {id} = useParams()
-    const {orders} = useAppSelector(store => ({
-        orders: store.wsReducer.orders,
-    }));
-    const order: any = orders.find((el: any) => el._id === id);
-    const [data, setData] = useState<TIngredient[]>([]);
     const {ingredients} = useAppSelector((store) => store.ingredients);
+    const {orders} = useAppSelector(store => ({
+        orders: store.wsReducer.orders,}));
+    const {id} = useParams();
 
-    useEffect(() => {
-        if (order && order.ingredients) {
-            const items: TIngredient[] = order.ingredients.map(
-                (item: any) =>
-                    ingredients.find(
-                        (newIngredient) => newIngredient._id === item
-                    ) as TIngredient
-            );
-            setData(items);
+    const order = orders && orders.find((elem) => elem._id === id);
+    const orderIngredients: any = [];
+
+    order?.ingredients.forEach((order) => {
+        const foundIngredient = ingredients.find(
+            (ingredient) => ingredient._id === order
+        );
+        if (foundIngredient) {
+            orderIngredients.push(foundIngredient);
         }
-    }, [ingredients]);
+    });
 
     const cardTotalCost = (ingredients: TIngredient[]) =>
         ingredients.reduce(
@@ -45,7 +41,7 @@ export default function ReadyOrderDetails() {
         );
 
     const renderFillers = () => {
-        return data.map((el, index) => {
+        return orderIngredients.map((el:any, index:any) => {
             return (
                 <div className={styles.items_box} key={index}>
                     <div className={styles.ingredient}>
@@ -75,9 +71,9 @@ export default function ReadyOrderDetails() {
 
     return (
         <div className={`${styles.section} `}>
-            <h2 className="text text_type_digits-default ml-10">#{order.number}</h2>
-            <h3 className="text text_type_main-medium ml-10 mt-10">{order.name}</h3>
-            <p className="text text_type_main-default ml-10 mt-3 text_color_success">{order.status === "done" ? "Выполнен" : "В работе"}</p>
+            <h2 className="text text_type_digits-default ml-10">#{order?.number}</h2>
+            <h3 className="text text_type_main-medium ml-10 mt-10">{order?.name}</h3>
+            <p className="text text_type_main-default ml-10 mt-3 text_color_success">{order?.status === "done" ? "Выполнен" : "В работе"}</p>
             <h4 className="text text_type_main-medium ml-10 mt-15">Состав:</h4>
             <div className={`${styles.list}`}>
                 {renderFillers()}
@@ -89,7 +85,7 @@ export default function ReadyOrderDetails() {
                                    mr-2`}
                                date={today}/>
                 <div className={styles.orderPrice}>
-                    <p className="text text_type_digits-default mr-2">{cardTotalCost(data)}</p>
+                    <p className="text text_type_digits-default mr-2">{cardTotalCost(orderIngredients)}</p>
                     <CurrencyIcon type={"primary"}/>
                 </div>
             </div>

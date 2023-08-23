@@ -7,7 +7,6 @@ import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 
 
 const IngredientCard = ({ item }: {item: TIngredient}) => {
-    const dispatch = useAppDispatch();
     const { bun, notBuns } = useAppSelector((state: any) => state.burgerFilling);
     const location = useLocation();
     const navigate = useNavigate();
