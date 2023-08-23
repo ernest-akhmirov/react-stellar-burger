@@ -11,6 +11,7 @@ export type AppDispatch<TReturnType = void> = (
 export type DispatchFunc = () => AppDispatch;
 
 export type TIngredient = {
+        count?: number;
         _id: string;
         image: string;
         name: string;

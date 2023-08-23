@@ -1,0 +1,96 @@
+.section {
+    min-width: 620px;
+    min-height: 500px;
+    display: flex;
+    flex-direction: column;
+    align-content: center;
+    padding-top: 60px;
+    padding-bottom:60px ;
+
+  }
+
+.list {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    max-height: 366px;
+    width: 100%;
+    list-style-type: none;
+    overflow-y: auto;
+    margin: 24px 0 0;
+    padding: 0;
+    gap: 16px;
+}
+
+.list::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2f2f37;
+}
+
+.list::-webkit-scrollbar-thumb {
+    scroll-behavior: smooth;
+    background: #8585ad;
+    border: 3px solid #8585ad;
+}
+
+.list::-webkit-scrollbar-thumb:hover {
+    background: #8585ad;
+}
+
+.items_box {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 24px 0 40px;
+    gap: 16px;
+
+}
+
+.imageContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    width: 64px;
+    height: 64px;
+    border-radius: 50%;
+    background:
+            linear-gradient(#000, #000) padding-box,
+            linear-gradient(to left, #4c4cff, #801ab2) border-box;
+    border: 2px solid transparent;
+    position: relative;
+}
+.image {
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    object-fit: cover;
+    position: absolute;
+}
+
+.ingredient {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.priceBlock {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+    justify-content: right;
+    gap: 8px;
+}
+
+.footer {
+    margin: 40px 40px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.orderPrice {
+    display: flex;
+    align-items: center;
+    flex-direction: row;
+}

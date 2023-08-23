@@ -4,6 +4,7 @@ import {useAppSelector} from "../../utils/hooks";
 import {TWSOrder} from "../../services/actions/WSActions";
 import {useEffect, useState} from "react";
 import {TIngredient} from "../../utils/types";
+import {useLocation, useNavigate} from "react-router-dom";
 
 const today = new Date();
 type OrderCardProps = {
@@ -11,9 +12,11 @@ type OrderCardProps = {
 }
 
 function OrderCard({order}: OrderCardProps) {
-
+    const location = useLocation();
+    const navigate = useNavigate();
     const [data, setData] = useState<TIngredient[]>([]);
-    const {ingredients} = useAppSelector((store) => store.ingredients)
+    const {ingredients} = useAppSelector((store) => store.ingredients);
+    const [fillers, setFillers] = useState<TIngredient[]>([]);
 
     useEffect(() => {
         if (order && order.ingredients) {
@@ -33,8 +36,12 @@ function OrderCard({order}: OrderCardProps) {
             0
         );
 
+    const openOrderHandler = () => {
+        navigate(`/feed/${order._id}`, { state: { background: location } })
+    };
+
     return (
-        <div className={styles.orderCard}>
+        <div className={styles.orderCard} onClick={openOrderHandler}>
             <div className={styles.orderCardHeader}>
                 <p className={`text text_type_digits-default`}>#{order.number}</p>
                 <FormattedDate className=
