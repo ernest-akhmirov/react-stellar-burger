@@ -4,7 +4,7 @@ import {
     GET_INGREDIENTS_ERROR,
     BASE_URL
 } from "../constants";
-import { checkResponse } from "../../utils/api";
+import {checkResponse} from "../../utils/api";
 import {AppDispatch, TIngredient} from "../../utils/types";
 
 type TGetIngredientsRequestAction = {
@@ -37,10 +37,12 @@ export const getIngredientsSuccess = (ingredients: TIngredient[]): TGetIngredien
 export const getIngredientsError = (): TGetIngredientsErrorAction => ({
     type: GET_INGREDIENTS_ERROR,
 });
+
 interface IResponseData {
     data: TIngredient[];
     success: boolean;
 }
+
 export const fetchIngredients = () => {
     return async (dispatch: AppDispatch) => {
         dispatch(getIngredientsRequest());

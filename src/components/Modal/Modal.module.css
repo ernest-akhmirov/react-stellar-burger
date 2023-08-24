@@ -12,23 +12,23 @@
     border: 1px solid rgba(76, 76, 255, 0.2);
     width: 620px;
     z-index: 2;
-  }
-  
-  .title {
+}
+
+.title {
     text-align: start;
-  }
-  
-  .main {
+}
+
+.main {
     display: flex;
     z-index: 6;
     width: 100%;
     align-items: center;
     justify-content: center;
-  }
-  
-  .icon {
+}
+
+.icon {
     position: absolute;
     cursor: pointer;
     top: 60px;
     right: 40px;
-  }
+}

@@ -5,9 +5,9 @@
     flex-direction: column;
     align-content: center;
     padding-top: 60px;
-    padding-bottom:60px ;
+    padding-bottom: 60px;
 
-  }
+}
 
 .list {
     display: flex;
@@ -54,12 +54,12 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background:
-            linear-gradient(#000, #000) padding-box,
-            linear-gradient(to left, #4c4cff, #801ab2) border-box;
+    background: linear-gradient(#000, #000) padding-box,
+    linear-gradient(to left, #4c4cff, #801ab2) border-box;
     border: 2px solid transparent;
     position: relative;
 }
+
 .image {
     width: 56px;
     height: 56px;

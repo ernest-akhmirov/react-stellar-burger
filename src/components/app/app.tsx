@@ -8,12 +8,7 @@ import {closeOrderDetails} from "../../services/actions/orderActions";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
 import ReadyOrderDetails from "../ReadyOrderDetails/ReadyOrderDetails";
 
-import {
-    Routes,
-    Route,
-    useLocation,
-    useNavigate,
-} from "react-router-dom";
+import {Route, Routes, useLocation, useNavigate,} from "react-router-dom";
 import {LoginPage} from "../../pages/LoginPage";
 import {RegistrationPage} from "../../pages/RegistrationPage";
 import {RememberPassword} from "../../pages/RememberPassword";
@@ -24,10 +19,7 @@ import {ProfileUser} from "../../pages/ProfileUser";
 import {IngredientPage} from "../../pages/ingredientPage";
 import {ReadyOrderPage} from "../../pages/ReadyOrderPage";
 import {getUser} from "../../services/actions/authActions";
-import {
-    OnlyUnauthenticated,
-    OnlyAuthenticated,
-} from "../ProtectedRoute/ProtectedRoute";
+import {OnlyAuthenticated, OnlyUnauthenticated,} from "../ProtectedRoute/ProtectedRoute";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import FeedPage from "../../pages/FeedPage";
 import OrderDetails from "../OrderDetails/OrderDetails";
@@ -129,7 +121,7 @@ function App() {
                         <div>
                             <Preloader/>
                             <p className='text text_type_main-medium mt-5'>
-                                Оформляем заказ<br />Подождите 15 секунд
+                                Оформляем заказ<br/>Подождите 15 секунд
                             </p>
                         </div>
                     }

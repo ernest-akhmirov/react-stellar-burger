@@ -7,7 +7,7 @@ import {
     SET_USER,
     UPDATE_USER,
 } from "../constants";
-import {TAuthActions, TUserType} from "../actions/authActions";
+import {TAuthActions,} from "../actions/authActions";
 
 type TAuthState = {
     user: null |
@@ -25,7 +25,7 @@ const initialState: TAuthState = {
     isPasswordResetPending: false,
 };
 
-export const authReducer = (state: TAuthState = initialState, action: TAuthActions):TAuthState => {
+export const authReducer = (state: TAuthState = initialState, action: TAuthActions): TAuthState => {
     switch (action.type) {
         case LOGIN_USER:
             return {

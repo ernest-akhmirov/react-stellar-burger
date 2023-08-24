@@ -32,6 +32,7 @@
 .OrdersSection::-webkit-scrollbar-thumb:hover {
     background: #8585ad;
 }
+
 .OrdersTable {
     width: 610px;
 }

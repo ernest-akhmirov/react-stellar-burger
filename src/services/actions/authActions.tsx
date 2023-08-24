@@ -15,8 +15,7 @@ import {TBurgerConstructorActions} from "./burgerConstructorActions";
 import {TIngredientsActions} from "./ingredientsActions";
 import {TIngredientsDetailActions} from "./ingredientsDetailsActions";
 import {TOrderActions} from "./orderActions";
-import {TWSActions} from "./WSActions";
-import {Action, ActionCreator} from "redux";
+import {TWSActions, TWSAuthActions} from "./WSActions";
 
 export type AppActions =
     | TBurgerConstructorActions
@@ -25,6 +24,7 @@ export type AppActions =
     | TOrderActions
     | TAuthActions
     | TWSActions
+    | TWSAuthActions
     ;
 
 export type AppThunk<ReturnType = void> = ThunkAction<
@@ -50,7 +50,7 @@ export type TAuthActions =
     | { type: typeof LOGOUT_USER };
 
 export const requestRememberPassword = (email: string) => {
-    return async (dispatch:AppDispatch) => {
+    return async (dispatch: AppDispatch) => {
         try {
             await request("password-reset", {
                 method: "POST",
@@ -65,7 +65,7 @@ export const requestRememberPassword = (email: string) => {
 };
 
 export const requestResetPassword = (password: string, code: string) => {
-    return async (dispatch:AppDispatch) => {
+    return async (dispatch: AppDispatch) => {
         try {
             await request("password-reset/reset", {
                 method: "POST",
@@ -116,7 +116,7 @@ export const login = (user: TUserType) => {
 };
 
 export const getUser = () => {
-    return async (dispatch:AppDispatch) => {
+    return async (dispatch: AppDispatch) => {
         try {
             const response = await requestWithTokenRefresh("auth/user", {
                 method: "GET",
@@ -133,8 +133,8 @@ export const getUser = () => {
     };
 };
 
-export const updateUser = (user:TUserType) => {
-    return async (dispatch:AppDispatch) => {
+export const updateUser = (user: TUserType) => {
+    return async (dispatch: AppDispatch) => {
         try {
             const response = await requestWithTokenRefresh("auth/user", {
                 method: "PATCH",

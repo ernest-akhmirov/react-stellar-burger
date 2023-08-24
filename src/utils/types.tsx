@@ -1,4 +1,4 @@
-import {store} from "../index";
+
 import {rootReducer} from "../services/reducers/rootReducer";
 import {AppActions, AppThunk} from "../services/actions/authActions";
 
@@ -11,21 +11,21 @@ export type AppDispatch<TReturnType = void> = (
 export type DispatchFunc = () => AppDispatch;
 
 export type TIngredient = {
-        count?: number;
-        _id: string;
-        image: string;
-        name: string;
-        price: number;
-        type: string;
-        proteins: number;
-        fat: number;
-        carbohydrates: number;
-        calories: number;
-        image_mobile: string;
-        image_large: string;
-        __v: number;
-        additionalId?: string;
-        index?: number;
+    count?: number;
+    _id: string;
+    image: string;
+    name: string;
+    price: number;
+    type: string;
+    proteins: number;
+    fat: number;
+    carbohydrates: number;
+    calories: number;
+    image_mobile: string;
+    image_large: string;
+    __v: number;
+    additionalId?: string;
+    index?: number;
 };
 
 

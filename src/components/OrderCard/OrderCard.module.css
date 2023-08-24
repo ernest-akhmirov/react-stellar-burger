@@ -20,8 +20,9 @@
     text-align: left;
     margin: 0;
 }
+
 .orderFooter {
-    display:flex;
+    display: flex;
     flex-direction: row;
     justify-content: space-between;
 }
@@ -48,17 +49,18 @@
     width: 64px;
     height: 64px;
     border-radius: 50%;
-    background:
-            linear-gradient(#000, #000) padding-box,
-            linear-gradient(to left, #4c4cff, #801ab2) border-box;
+    background: linear-gradient(#000, #000) padding-box,
+    linear-gradient(to left, #4c4cff, #801ab2) border-box;
     border: 2px solid transparent;
     margin-right: -15px;
     position: relative;
 }
+
 .orderIngredients {
     display: flex;
     flex-direction: row-reverse;
 }
+
 .count {
     display: flex;
     position: absolute;
@@ -67,6 +69,6 @@
     border-radius: 50%;
     justify-content: center;
     align-items: center;
-    background-color: rgba(0,0,0,0.7);
+    background-color: rgba(0, 0, 0, 0.7);
 }
 

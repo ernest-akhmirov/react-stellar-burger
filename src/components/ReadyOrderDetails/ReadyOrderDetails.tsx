@@ -8,19 +8,11 @@ import {useLocation} from "react-router-dom";
 
 
 const today = new Date();
-// type TOrderDetailsProps = {
-//     order: {
-//         name: string,
-//         order: {
-//             number: number,
-//         },
-//         success: boolean,
-//     };
-// }
+
 export default function ReadyOrderDetails() {
     const location = useLocation()
     const {ingredients} = useAppSelector((store) => store.ingredients);
-    const { orders, userOrders } = useAppSelector((store) => ({
+    const {orders, userOrders} = useAppSelector((store) => ({
         orders: store.wsReducer.orders,
         userOrders: store.wsReducer.userOrders,
     }));
@@ -73,7 +65,7 @@ export default function ReadyOrderDetails() {
             );
         });
     };
-    // {cardTotalCost(data)}
+   
 
     return (
         <div className={`${styles.section} `}>

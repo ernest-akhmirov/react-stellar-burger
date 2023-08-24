@@ -37,9 +37,9 @@ function OrderCard({order}: OrderCardProps) {
 
     const openOrderHandler = () => {
         if (location.pathname.indexOf("feed") === -1) {
-            navigate(`/profile/orders/${order._id}`, { state: { background: location } });
+            navigate(`/profile/orders/${order._id}`, {state: {background: location}});
         } else {
-            navigate(`/feed/${order._id}`, { state: { background: location } });
+            navigate(`/feed/${order._id}`, {state: {background: location}});
         }
     };
 

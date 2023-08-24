@@ -4,7 +4,7 @@ import ReadyOrderDetails from "../components/ReadyOrderDetails/ReadyOrderDetails
 export function ReadyUserOrderPage() {
     return (
         <div className={style.readyOrder}>
-            <ReadyOrderDetails />
+            <ReadyOrderDetails/>
         </div>
     );
 }

@@ -12,7 +12,7 @@
     align-items: center;
     margin-left: auto;
     margin-right: auto;
-    
+
 }
 
 .ingredient {
@@ -23,7 +23,7 @@
     justify-content: center;
     width: 640px;
     margin: 120px auto 0;
-  }
+}
 
 .readyOrder {
     text-align: center;

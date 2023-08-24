@@ -1,28 +1,30 @@
-import { Navigate, useLocation } from "react-router-dom";
-import {FC, ReactElement} from "react";
+import {Navigate, useLocation} from "react-router-dom";
+import React, {FC, ReactElement} from "react";
 import {useAppSelector} from "../../utils/hooks";
 import {RootState} from "../../utils/types";
 
 
 type TProtectedProps = {
-  onlyUnauthenticated?: boolean;
-  element: ReactElement;
+    onlyUnauthenticated?: boolean;
+    element: ReactElement;
 };
-const Protected: FC<TProtectedProps> = ({ onlyUnauthenticated = false, element }) => {
-  const user = useAppSelector((store: RootState) => store.authReducer.user);
-  const location = useLocation();
+const Protected: FC<TProtectedProps> = ({onlyUnauthenticated = false, element}) => {
+    const user = useAppSelector((store: RootState) => store.authReducer.user);
+    const location = useLocation();
 
-  if (onlyUnauthenticated && user) {
+    if (onlyUnauthenticated && user) {
 
-    const { from } = location.state || { from: { pathname: "/" } };
-    return <Navigate to={from} />;
-  }
+        const {from} = location.state || {from: {pathname: "/"}};
+        return <Navigate to={from}/>;
+    }
 
-  if (!onlyUnauthenticated && !user) {
-    return <Navigate to="/login" state={{ from: location }} />;
-  }
-  return element;
+    if (!onlyUnauthenticated && !user) {
+        return <Navigate to="/login" state={{from: location}}/>;
+    }
+    return element;
 };
 
-export const OnlyAuthenticated: React.FC<TProtectedProps>  = (props) => <Protected onlyUnauthenticated={false} {...props} />;
-export const OnlyUnauthenticated: React.FC<TProtectedProps>  = (props) => <Protected onlyUnauthenticated={true} {...props} />;
+export const OnlyAuthenticated: React.FC<TProtectedProps> = (props) => <Protected
+    onlyUnauthenticated={false} {...props} />;
+export const OnlyUnauthenticated: React.FC<TProtectedProps> = (props) => <Protected
+    onlyUnauthenticated={true} {...props} />;

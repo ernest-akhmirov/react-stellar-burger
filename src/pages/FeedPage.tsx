@@ -2,7 +2,6 @@ import styles from "./FeedPage.module.css"
 import OrderCard from "../components/OrderCard/OrderCard";
 import {useAppSelector} from "../utils/hooks";
 import {TWSOrder} from "../services/actions/WSActions";
-import constructorStyle from "../components/BurgerConstructor/BurgerConstructor.module.css";
 
 function FeedPage() {
 

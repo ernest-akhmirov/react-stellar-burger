@@ -1,17 +1,17 @@
 import constructorStyle from '../BurgerConstructor/BurgerConstructor.module.css';
-import { ConstructorElement, DragIcon, CurrencyIcon, Button } from '@ya.praktikum/react-developer-burger-ui-components';
+import {ConstructorElement, DragIcon, CurrencyIcon, Button} from '@ya.praktikum/react-developer-burger-ui-components';
 import DraggableConstructorElement from '../DraggableConstructorElement/DraggableConstructorElement';
 import {
     addBurgerIngredient,
     removeBurgerIngredient,
     moveNotBunsIngredient
 } from '../../services/actions/burgerConstructorActions';
-import { placeOrder } from '../../services/actions/orderActions';
-import { useDrop } from 'react-dnd';
-import { useMemo, FC } from 'react';
-import { useNavigate } from "react-router-dom";
-import { RootState, TIngredient } from "../../utils/types";
-import { useAppDispatch, useAppSelector } from "../../utils/hooks";
+import {placeOrder} from '../../services/actions/orderActions';
+import {useDrop} from 'react-dnd';
+import {useMemo, FC} from 'react';
+import {useNavigate} from "react-router-dom";
+import {RootState, TIngredient} from "../../utils/types";
+import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 
 const BurgerConstructor: FC = () => {
     const dispatch = useAppDispatch();
@@ -81,7 +81,7 @@ const BurgerConstructor: FC = () => {
                                 moveItem={moveNotBunsHandler}
                             >
                                 <div className={`${constructorStyle.mainItem} pt-4`}>
-                                    <DragIcon type='primary' />
+                                    <DragIcon type='primary'/>
                                     <ConstructorElement
                                         text={item.name}
                                         price={item.price}
@@ -104,7 +104,7 @@ const BurgerConstructor: FC = () => {
                     <div className={`${constructorStyle.info} mt-10`}>
                         <div className={`${constructorStyle.price} mr-10`}>
                             <p className='text text_type_digits-medium pr-3'>{totalCost}</p>
-                            <CurrencyIcon type='primary' />
+                            <CurrencyIcon type='primary'/>
                         </div>
                         <Button htmlType='button' type='primary' size='medium' onClick={makeOrder}>
                             Оформить заказ

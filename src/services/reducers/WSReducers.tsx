@@ -1,4 +1,4 @@
-import {TWSActions,TWSAuthActions} from "../actions/WSActions";
+import {TWSActions, TWSAuthActions} from "../actions/WSActions";
 import {TWSOrder} from "../actions/WSActions";
 import {
     WS_CONNECTION_START,

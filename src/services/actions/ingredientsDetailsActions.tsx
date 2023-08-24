@@ -6,7 +6,7 @@ type TOpenIngredientDetailsAction = {
     ingredient: TIngredient;
 }
 
-type TCloseIngredientDetailsAction ={
+type TCloseIngredientDetailsAction = {
     type: typeof CLOSE_INGREDIENT_DETAILS;
 }
 

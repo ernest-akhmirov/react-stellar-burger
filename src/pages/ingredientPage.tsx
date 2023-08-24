@@ -4,7 +4,7 @@ import IngredientDetails from '../components/IngredientDetails/IngredientDetails
 export function IngredientPage() {
     return (
         <div className={style.ingredient}>
-            <IngredientDetails />
+            <IngredientDetails/>
         </div>
     );
 }

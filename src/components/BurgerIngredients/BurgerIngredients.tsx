@@ -1,8 +1,8 @@
 import React, {useRef, useState, useMemo, useEffect, FC} from "react";
-import { Tab } from "@ya.praktikum/react-developer-burger-ui-components";
+import {Tab} from "@ya.praktikum/react-developer-burger-ui-components";
 import ingredientsStyles from "./BurgerIngredients.module.css";
 import IngredientCard from "../IngredientCard/IngredientCard";
-import { useInView } from "react-intersection-observer";
+import {useInView} from "react-intersection-observer";
 import Preloader from "../Preloader/Preloader";
 import {TIngredient} from "../../utils/types";
 import {useAppSelector} from "../../utils/hooks";
@@ -24,17 +24,17 @@ const BurgerIngredients: FC = () => {
         main: useRef<HTMLParagraphElement>(null),
     };
 
-    const { ref: bunRef, inView: bunInView } = useInView();
-    const { ref: sauceRef, inView: sauceInView } = useInView();
-    const { ref: mainRef, inView: mainInView } = useInView();
+    const {ref: bunRef, inView: bunInView} = useInView();
+    const {ref: sauceRef, inView: sauceInView} = useInView();
+    const {ref: mainRef, inView: mainInView} = useInView();
 
-    const { buns, sauces, main } = useMemo(() => {
+    const {buns, sauces, main} = useMemo(() => {
         const buns = data.filter((item: TIngredient) => item.type === "bun");
         const sauces = data.filter((item: TIngredient) => item.type === "sauce");
         const main = data.filter((item: TIngredient) => item.type === "main");
 
 
-        return { buns, sauces, main };
+        return {buns, sauces, main};
     }, [data]);
 
     const handleTabClick = (type: "bun" | "sauce" | "main") => {
@@ -62,19 +62,17 @@ const BurgerIngredients: FC = () => {
     useEffect(() => {
         if (bunInView) {
             setCurrent('bun')
-        }
-        else if (sauceInView) {
+        } else if (sauceInView) {
             setCurrent('sauce')
-        }
-        else if (mainInView) {
+        } else if (mainInView) {
             setCurrent('main')
         }
     }, [bunInView, sauceInView, mainInView])
 
     const componentData = [
-        { title: "Булки", data: buns, type: "bun" },
-        { title: "Соусы", data: sauces, type: "sauce" },
-        { title: "Начинки", data: main, type: "main" },
+        {title: "Булки", data: buns, type: "bun"},
+        {title: "Соусы", data: sauces, type: "sauce"},
+        {title: "Начинки", data: main, type: "main"},
     ]
 
     return (
@@ -92,15 +90,15 @@ const BurgerIngredients: FC = () => {
                     </Tab>))}
             </div>
             {loading ? (
-                <Preloader /> // Показываем лоадер, если данные загружаются
+                <Preloader/> // Показываем лоадер, если данные загружаются
             ) : (
                 <section className={ingredientsStyles.section}>
                     {componentData.map((tab) => (
                         <div key={tab.type} ref={sectionRefs[tab.type as "bun" | "sauce" | "main"]}>
                             <h3 className="text text_type_main-medium mb-6 mt-10">{tab.title}</h3>
                             <div className={ingredientsStyles.cardList}
-                                ref={tab.type === 'bun' ? bunRef :
-                                    tab.type === 'sauce' ? sauceRef : mainRef}>
+                                 ref={tab.type === 'bun' ? bunRef :
+                                     tab.type === 'sauce' ? sauceRef : mainRef}>
                                 {tab.data.map((item: TIngredient) => (
                                     <IngredientCard
                                         item={item}

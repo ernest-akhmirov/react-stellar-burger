@@ -1,19 +1,19 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import style from "./style.module.css";
-import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate,  } from "react-router-dom";
-import { requestRememberPassword } from '../services/actions/authActions';
+import {Input, Button,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {useNavigate,} from "react-router-dom";
+import {requestRememberPassword} from '../services/actions/authActions';
 import {useAppDispatch} from "../utils/hooks";
 
 
 export function RememberPassword() {
     const navigate = useNavigate();
-    const [form, setValue] = useState(() => ({ email: "", }));
+    const [form, setValue] = useState(() => ({email: "",}));
     const dispatch = useAppDispatch();
 
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setValue({ ...form, [e.target.name]: e.target.value });
+        setValue({...form, [e.target.name]: e.target.value});
     };
 
     const signIn = () => {
@@ -42,9 +42,9 @@ export function RememberPassword() {
                 />
             </div>
             <Button extraClass="mt-6"
-                htmlType="submit"
-                type="primary"
-                size="medium"
+                    htmlType="submit"
+                    type="primary"
+                    size="medium"
             >
                 Восстановить
             </Button>

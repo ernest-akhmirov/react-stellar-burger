@@ -14,11 +14,11 @@ const initialState: TBurgerConstructorState = {
     notBuns: [],
 };
 
-export const burgerConstructorReducer = (state:TBurgerConstructorState = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
+export const burgerConstructorReducer = (state: TBurgerConstructorState = initialState, action: TBurgerConstructorActions): TBurgerConstructorState => {
     switch (action.type) {
         case ADD_BURGER_INGREDIENT: {
             if (action.ingredient.type === "bun") {
-                return { ...state, bun: action.ingredient };
+                return {...state, bun: action.ingredient};
             }
             return {
                 ...state,
@@ -32,18 +32,18 @@ export const burgerConstructorReducer = (state:TBurgerConstructorState = initial
             };
         }
         case MOVE_NOTBUNS_INGREDIENT: {
-            const { dragIndex, hoverIndex } = action.payload;
+            const {dragIndex, hoverIndex} = action.payload;
             const updatedNotBuns = update(state.notBuns, {
-              $splice: [
-                [dragIndex, 1],
-                [hoverIndex, 0, state.notBuns[dragIndex]],
-              ],
+                $splice: [
+                    [dragIndex, 1],
+                    [hoverIndex, 0, state.notBuns[dragIndex]],
+                ],
             });
             return {
-              ...state,
-              notBuns: updatedNotBuns,
+                ...state,
+                notBuns: updatedNotBuns,
             };
-          }
+        }
 
         case CLEAR_INGREDIENT: {
             return initialState;
