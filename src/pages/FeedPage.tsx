@@ -1,8 +1,6 @@
-import React, {useEffect,} from 'react';
 import styles from "./FeedPage.module.css"
 import OrderCard from "../components/OrderCard/OrderCard";
-import {useAppDispatch, useAppSelector} from "../utils/hooks";
-import {WS_CONNECTION_START, WS_CONNECTION_CLOSED} from "../services/constants";
+import {useAppSelector} from "../utils/hooks";
 import {TWSOrder} from "../services/actions/WSActions";
 import constructorStyle from "../components/BurgerConstructor/BurgerConstructor.module.css";
 

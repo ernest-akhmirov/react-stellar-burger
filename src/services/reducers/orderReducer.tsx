@@ -11,6 +11,7 @@ type TOrderState = {
     orderRequest: boolean;
     orderSuccess: boolean;
     orderError: boolean;
+    isOrderModalOpen: boolean,
 }
 
 const initialState:TOrderState = {
@@ -18,6 +19,7 @@ const initialState:TOrderState = {
   orderRequest: false,
   orderSuccess: false,
   orderError: false,
+  isOrderModalOpen: false,
 };
 
 export const orderReducer = (state: TOrderState = initialState, action: TOrderActions): TOrderState => {
@@ -28,6 +30,7 @@ export const orderReducer = (state: TOrderState = initialState, action: TOrderAc
         orderRequest: true,
         orderSuccess: false,
         orderError: false,
+        isOrderModalOpen: true,
       };
     }
 
@@ -38,6 +41,7 @@ export const orderReducer = (state: TOrderState = initialState, action: TOrderAc
         orderSuccess: true,
         orderError: false,
         orderData: action.orderData,
+        isOrderModalOpen: true,
       };
     }
 
@@ -47,6 +51,7 @@ export const orderReducer = (state: TOrderState = initialState, action: TOrderAc
         orderRequest: false,
         orderSuccess: false,
         orderError: true,
+        isOrderModalOpen: false,
       };
     }
 
@@ -57,6 +62,7 @@ export const orderReducer = (state: TOrderState = initialState, action: TOrderAc
         orderRequest: false,
         orderSuccess: false,
         orderError: true,
+        isOrderModalOpen: false,
       };
     }
 

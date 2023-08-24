@@ -7,6 +7,7 @@ import {
 } from "../constants";
 import {checkResponse} from "../../utils/api";
 import {AppDispatch,} from "../../utils/types";
+import {clearBurgerIngredients} from "./burgerConstructorActions";
 
 export type TOrderData = {
     success: boolean;
@@ -56,6 +57,7 @@ export const closeOrderDetails = (): TCloseOrderDetails => ({
 });
 
 export const placeOrder = (ingredientsIds: string[]) => {
+    const token: string = localStorage.getItem("accessToken") || "";
     return async (dispatch: AppDispatch) => {
         dispatch(placeOrderRequest());
 
@@ -64,11 +66,13 @@ export const placeOrder = (ingredientsIds: string[]) => {
                 method: "POST",
                 headers: {
                     "Content-Type": "application/json",
+                    "Authorization": token,
                 },
                 body: JSON.stringify({ingredients: ingredientsIds}),
             });
             const orderData: TOrderData = await checkResponse(res);
             dispatch(placeOrderSuccess(orderData));
+            dispatch(clearBurgerIngredients());
         } catch (error) {
             dispatch(placeOrderError());
             console.error(error);

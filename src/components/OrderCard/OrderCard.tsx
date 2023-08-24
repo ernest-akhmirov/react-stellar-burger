@@ -6,7 +6,6 @@ import {useEffect, useState} from "react";
 import {TIngredient} from "../../utils/types";
 import {useLocation, useNavigate} from "react-router-dom";
 
-const today = new Date();
 type OrderCardProps = {
     order: TWSOrder
 }
@@ -16,7 +15,7 @@ function OrderCard({order}: OrderCardProps) {
     const navigate = useNavigate();
     const [data, setData] = useState<TIngredient[]>([]);
     const {ingredients} = useAppSelector((store) => store.ingredients);
-    const [fillers, setFillers] = useState<TIngredient[]>([]);
+
 
     useEffect(() => {
         if (order && order.ingredients) {
@@ -37,7 +36,11 @@ function OrderCard({order}: OrderCardProps) {
         );
 
     const openOrderHandler = () => {
-        navigate(`/feed/${order._id}`, { state: { background: location } })
+        if (location.pathname.indexOf("feed") === -1) {
+            navigate(`/profile/orders/${order._id}`, { state: { background: location } });
+        } else {
+            navigate(`/feed/${order._id}`, { state: { background: location } });
+        }
     };
 
     return (
@@ -49,12 +52,23 @@ function OrderCard({order}: OrderCardProps) {
                                    text_type_main-default
                                    text_color_inactive
                                    mr-2`}
-                               date={today}
+                               date={new Date(order.updatedAt)}
                 />
             </div>
             <p className={`${styles.orderBurgerName} text text_type_main-medium`}>
                 {order.name}
             </p>
+            {location.pathname.indexOf("feed") === -1 ? (
+                <p
+                    className={
+                        order?.status === "done"
+                            ? "text text_type_main-default text_color_success"
+                            : "text text_type_main-default"
+                    }
+                >
+                    {order?.status === "done" ? "Выполнен" : "Готовится"}
+                </p>
+            ) : null}
             <div className={styles.orderFooter}>
                 <div className={styles.orderIngredients}>
                     {data?.map((newIngredient, index) => {

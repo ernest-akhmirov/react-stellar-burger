@@ -1,8 +1,4 @@
-import {
-    ADD_BURGER_INGREDIENT,
-    REMOVE_BURGER_INGREDIENT,
-    MOVE_NOTBUNS_INGREDIENT
-} from "../constants";
+import {ADD_BURGER_INGREDIENT, CLEAR_INGREDIENT, MOVE_NOTBUNS_INGREDIENT, REMOVE_BURGER_INGREDIENT} from "../constants";
 
 import update from "immutability-helper";
 import {TIngredient} from "../../utils/types";
@@ -48,6 +44,10 @@ export const burgerConstructorReducer = (state:TBurgerConstructorState = initial
               notBuns: updatedNotBuns,
             };
           }
+
+        case CLEAR_INGREDIENT: {
+            return initialState;
+        }
 
         default:
             return state;

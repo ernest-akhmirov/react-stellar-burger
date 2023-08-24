@@ -9,7 +9,7 @@ export function checkResponse<T>(res: Response): Promise<T> {
     return res.json();
   }
   return Promise.reject(`Ошибка ${res.status}`);
-};
+}
 //
 
 const handleResponse = (res: Response) => {
@@ -19,7 +19,7 @@ const handleResponse = (res: Response) => {
   return res.json().then((err) => Promise.reject(err));
 };
 
-const checkSuccess = (res: any) => {
+const checkSuccess = (res:any) => {
   if (res.success) {
     return res;
   }

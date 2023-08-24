@@ -32,16 +32,19 @@ import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 import FeedPage from "../../pages/FeedPage";
 import OrderDetails from "../OrderDetails/OrderDetails";
 import {WS_CONNECTION_START} from "../../services/constants";
+import {ReadyUserOrderPage} from "../../pages/ReadyUserOrderPage";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
     const dispatch = useAppDispatch();
     const order = useAppSelector((state) => state.order.orderData);
+    const isOrderModalOpen = useAppSelector((state) => state.order.isOrderModalOpen);
     const location = useLocation();
     const navigate = useNavigate();
     const background = location.state && location.state.background;
 
     useEffect(() => {
-        const token = localStorage.getItem("accessToken");
+        const token = localStorage.getItem("accessToken"); //здесь токен с bearer
         if (token) {
             dispatch(getUser());
         }
@@ -83,10 +86,12 @@ function App() {
                 >
                     <Route path="/profile" element={<ProfileUser/>}/>
                     <Route path="/profile/orders" element={<ProfileOrders/>}/>
+
                 </Route>
                 <Route path="/ingredients/:id" element={<IngredientPage/>}/>
                 <Route path="/feed" element={<FeedPage/>}> </Route>
                 <Route path="/feed/:id" element={<ReadyOrderPage/>}/>
+                <Route path="/profile/orders/:id" element={<OnlyAuthenticated element={<ReadyUserOrderPage/>}/>}/>
             </Routes>
             {background && (
                 <Routes>
@@ -106,11 +111,28 @@ function App() {
                             </Modal>
                         }
                     />
+                    <Route
+                        path="/profile/orders/:id"
+                        element={
+                            <Modal closeModal={closeIngredientModal}>
+                                <ReadyOrderDetails/>
+                            </Modal>
+                        }
+                    />
                 </Routes>
             )}
-            {order && (
+            {isOrderModalOpen && (
                 <Modal closeModal={closeOrderModal}>
-                    <OrderDetails order={order}/>
+                    {order ?
+                        <OrderDetails order={order}/>
+                        :
+                        <div>
+                            <Preloader/>
+                            <p className='text text_type_main-medium mt-5'>
+                                Оформляем заказ<br />Подождите 15 секунд
+                            </p>
+                        </div>
+                    }
                 </Modal>
             )}
         </div>
@@ -120,8 +142,3 @@ function App() {
 export default App;
 
 
-// {order && (
-//     <Modal closeModal={closeOrderModal}>
-//         <OrderDetails order={order} />
-//     </Modal>
-// )}

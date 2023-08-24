@@ -4,6 +4,7 @@ import {useParams} from "react-router";
 import {useAppSelector} from "../../utils/hooks";
 import {TIngredient} from "../../utils/types";
 import {CurrencyIcon, FormattedDate} from "@ya.praktikum/react-developer-burger-ui-components";
+import {useLocation} from "react-router-dom";
 
 
 const today = new Date();
@@ -17,13 +18,18 @@ const today = new Date();
 //     };
 // }
 export default function ReadyOrderDetails() {
+    const location = useLocation()
     const {ingredients} = useAppSelector((store) => store.ingredients);
-    const {orders} = useAppSelector(store => ({
-        orders: store.wsReducer.orders,}));
+    const { orders, userOrders } = useAppSelector((store) => ({
+        orders: store.wsReducer.orders,
+        userOrders: store.wsReducer.userOrders,
+    }));
     const {id} = useParams();
 
-    const order = orders && orders.find((elem) => elem._id === id);
-    const orderIngredients: any = [];
+    const selectedOrders = location.pathname.includes("/profile") ? userOrders : orders;
+
+    const order = selectedOrders && selectedOrders.find((elem) => elem._id === id);
+    const orderIngredients: TIngredient[] = [];
 
     order?.ingredients.forEach((order) => {
         const foundIngredient = ingredients.find(
@@ -41,7 +47,7 @@ export default function ReadyOrderDetails() {
         );
 
     const renderFillers = () => {
-        return orderIngredients.map((el:any, index:any) => {
+        return orderIngredients.map((el, index) => {
             return (
                 <div className={styles.items_box} key={index}>
                     <div className={styles.ingredient}>

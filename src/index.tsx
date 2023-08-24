@@ -10,10 +10,10 @@ import thunk from "redux-thunk";
 import {composeWithDevTools} from "redux-devtools-extension";
 import {BrowserRouter} from 'react-router-dom';
 import {socketMiddleware} from "./services/WSMiddleware";
-import {wsActions} from "./services/actions/WSActions";
+import {wsActions, wsAuthActions} from "./services/actions/WSActions";
 
 const wsUrl: string = 'wss://norma.nomoreparties.space/orders';
-export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, socketMiddleware(wsUrl, wsActions))));
+export const store = createStore(rootReducer, composeWithDevTools(applyMiddleware(thunk, socketMiddleware(wsUrl, wsActions), socketMiddleware(wsUrl, wsAuthActions))));
 
 ReactDOM.render(
     <React.StrictMode>

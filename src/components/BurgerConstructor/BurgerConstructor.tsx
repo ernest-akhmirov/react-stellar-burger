@@ -31,7 +31,7 @@ const BurgerConstructor: FC = () => {
 
     const [, dropRef] = useDrop({
         accept: 'filler',
-        drop(item: any) {
+        drop(item: TIngredient) {
             dispatch(addBurgerIngredient(item));
         },
     });
