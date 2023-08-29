@@ -1,36 +1,37 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import style from "./style.module.css";
-import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate, Navigate} from "react-router-dom";
-import { requestResetPassword } from '../services/actions/authActions';
+import {Input, Button,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {useNavigate, Navigate} from "react-router-dom";
+import {requestResetPassword} from '../services/actions/authActions';
 import {useAppDispatch, useAppSelector} from "../utils/hooks";
+import {RootState} from "../utils/types";
 
 
 export function ResetPasswordPage() {
     const navigate = useNavigate();
     const dispatch = useAppDispatch();
-    const [form, setValue] = useState(() => ({  password: "", code: "" }));
+    const [form, setValue] = useState(() => ({password: "", code: ""}));
     const [showPassword, setShowPassword] = useState(false);
-    const isRememberVisited = useAppSelector((state: any) => state.authReducer.isPasswordResetPending);
+    const isRememberVisited = useAppSelector((state: RootState) => state.authReducer.isPasswordResetPending);
 
     if (!isRememberVisited) {
-        return <Navigate to="/forgot-password" replace={true} />;
+        return <Navigate to="/forgot-password" replace={true}/>;
     }
-    const onChange = (e: React.ChangeEvent<HTMLInputElement>):void => {
-        setValue({ ...form, [e.target.name]: e.target.value });
+    const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
+        setValue({...form, [e.target.name]: e.target.value});
     };
 
-      const signIn = () => {
+    const signIn = () => {
         navigate("/login");
     };
-    
-    const onSubmit = (e: React.FormEvent<HTMLFormElement>):void =>{
+
+    const onSubmit = (e: React.FormEvent<HTMLFormElement>): void => {
         console.log('установлен новый пароль')
         e.preventDefault();
         dispatch(requestResetPassword(form.password, form.code));
         navigate("/login");
-        };
-    
+    };
+
     const togglePasswordVisibility = () => {
         setShowPassword(!showPassword);
     };
@@ -64,7 +65,7 @@ export function ResetPasswordPage() {
             </div>
             <Button extraClass="mt-6"
                     htmlType="submit"
-                    type="primary" 
+                    type="primary"
                     size="medium"
             >
                 Сохранить

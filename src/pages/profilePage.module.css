@@ -2,14 +2,14 @@
     display: flex;
     width: 1280px;
     margin: 120px auto 0;
-  }
-  
-  .nav {
+}
+
+.nav {
     display: flex;
     flex-direction: column;
-  }
-  
-  .link {
+}
+
+.link {
     display: flex;
     align-items: center;
     width: 320px;
@@ -17,18 +17,18 @@
     text-decoration: none;
     margin: 0;
     padding: 0;
-  }
-  
-  .active {
+}
+
+.active {
     color: white;
-  }
-  
-  .link:active {
+}
+
+.link:active {
     color: inherit;
-  }
-  
-  .description {
+}
+
+.description {
     width: 320px;
     color: #404052;
-  }
+}
   

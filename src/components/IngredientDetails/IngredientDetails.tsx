@@ -1,14 +1,14 @@
 import React, {FC} from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
-import { useParams } from "react-router";
-import {TIngredient} from "../../utils/types";
+import {useParams} from "react-router";
+import {RootState, TIngredient} from "../../utils/types";
 import {useAppSelector} from "../../utils/hooks";
 
 const IngredientDetails: FC = () => {
-    const { id } = useParams()
+    const {id} = useParams()
 
-    const ingredients = useAppSelector((state: any) => state.ingredients.ingredients);
-    const item: TIngredient = ingredients.find((el:TIngredient) => el._id === id);
+    const ingredients = useAppSelector((state: RootState) => state.ingredients.ingredients);
+    const item: TIngredient | undefined = ingredients.find((el: TIngredient) => el._id === id);
 
     if (!item) {
         return (
@@ -22,8 +22,8 @@ const IngredientDetails: FC = () => {
         <div className={detailsStyle.section}>
             <p className={`${detailsStyle.title} text text_type_main-large `}>Детали ингредиента</p>
             <img src={item.image_large}
-                alt={item.name}
-                className={`${detailsStyle.image} mr-5 ml-5`} />
+                 alt={item.name}
+                 className={`${detailsStyle.image} mr-5 ml-5`}/>
             <p className={`${detailsStyle.name} text text_type_main-medium mt-4`}>
                 {item.name}
             </p>

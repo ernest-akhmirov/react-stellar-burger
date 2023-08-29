@@ -1,0 +1,62 @@
+.wrapper {
+    margin-right: auto;
+    margin-left: auto;
+    justify-content: center;
+    max-width: 1290px;
+}
+
+.main {
+    display: flex;
+    flex-direction: row;
+    gap: 60px;
+}
+
+.OrdersSection {
+    max-width: 610px;
+    overflow-y: auto;
+    max-height: 912px;
+    padding-right: 8px;
+}
+
+.OrdersSection::-webkit-scrollbar {
+    width: 8px;
+    background-color: #2f2f37;
+}
+
+.OrdersSection::-webkit-scrollbar-thumb {
+    scroll-behavior: smooth;
+    background: #8585ad;
+    border: 3px solid #8585ad;
+}
+
+.OrdersSection::-webkit-scrollbar-thumb:hover {
+    background: #8585ad;
+}
+
+.OrdersTable {
+    width: 610px;
+}
+
+.OrdersStatus {
+    display: flex;
+    flex-direction: row;
+    gap: 36px;
+}
+
+.OrdersList {
+    margin: 0;
+    padding: 0;
+    display: inline-flex;
+    flex-flow: column wrap;
+    list-style: none;
+    gap: 8px;
+    max-height: 330px;
+}
+
+.glow {
+    text-shadow: 0 0 16px rgba(51, 51, 255, 0.25), 0 0 8px rgba(51, 51, 255, 0.25), 0 4px 32px rgba(51, 51, 255, 0.5);
+}
+
+.Done {
+    width: 50%;
+}

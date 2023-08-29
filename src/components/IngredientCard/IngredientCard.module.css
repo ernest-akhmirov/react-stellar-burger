@@ -5,17 +5,17 @@
     max-width: 272px;
     cursor: pointer;
     position: relative;
- }
- 
- .price {
+}
+
+.price {
     display: flex;
     align-items: center;
     justify-content: center;
     flex-direction: row;
- }
- 
- .name {
+}
+
+.name {
     display: flex;
     justify-content: center;
     text-align: center;
- }
+}

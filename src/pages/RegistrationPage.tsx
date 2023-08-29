@@ -1,18 +1,18 @@
-import React, { useState } from 'react';
+import React, {useState} from 'react';
 import style from "./style.module.css";
-import { Input, Button, } from "@ya.praktikum/react-developer-burger-ui-components";
-import { useNavigate } from "react-router-dom";
-import { register } from '../services/actions/authActions';
+import {Input, Button,} from "@ya.praktikum/react-developer-burger-ui-components";
+import {useNavigate} from "react-router-dom";
+import {register} from '../services/actions/authActions';
 import {useAppDispatch} from "../utils/hooks";
 
 export function RegistrationPage() {
     const navigate = useNavigate();
-    const [form, setValue] = useState(() => ({ name: "", email: "", password: "" }));
+    const [form, setValue] = useState(() => ({name: "", email: "", password: ""}));
     const [showPassword, setShowPassword] = useState(false);
     const dispatch = useAppDispatch();
 
     const onChange = (e: React.ChangeEvent<HTMLInputElement>): void => {
-        setValue({ ...form, [e.target.name]: e.target.value });
+        setValue({...form, [e.target.name]: e.target.value});
     };
 
     const signIn = () => {
@@ -69,10 +69,10 @@ export function RegistrationPage() {
                 />
             </div>
             <Button extraClass="mt-6"
-                htmlType="submit"
-                type="primary"
-                size="medium"
-                >
+                    htmlType="submit"
+                    type="primary"
+                    size="medium"
+            >
                 Зарегистрироваться
             </Button>
             <div className={`mt-20 ${style.footer}`}>

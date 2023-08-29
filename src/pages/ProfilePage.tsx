@@ -1,6 +1,6 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import {NavLink, Outlet, useLocation} from "react-router-dom";
 import style from "./profilePage.module.css";
-import { logout } from "../services/actions/authActions";
+import {logout} from "../services/actions/authActions";
 import {useAppDispatch} from "../utils/hooks";
 
 
@@ -46,10 +46,14 @@ export function ProfilePage() {
                 <p
                     className={`${style.description} text text_type_main-default mt-20`}
                 >
-                    В этом разделе вы можете изменить свои персональные данные
+                    {location.pathname === "/profile/orders" ?
+                        'В этом разделе вы можете просмотреть свою историю заказов'
+                        :
+                        'В этом разделе вы можете изменить свои персональные данные'
+                    }
                 </p>
             </nav>
-            <Outlet />
+            <Outlet/>
         </div>
     );
 }

@@ -1,47 +1,47 @@
 import styles from "./app.module.css";
-import { useEffect, } from "react";
+import {useEffect,} from "react";
 import AppHeader from "../AppHeader/AppHeader";
 import Main from "../Main/Main";
 import Modal from "../Modal/Modal";
-import { fetchIngredients } from "../../services/actions/ingredientsActions";
-import { closeOrderDetails } from "../../services/actions/orderActions";
+import {fetchIngredients} from "../../services/actions/ingredientsActions";
+import {closeOrderDetails} from "../../services/actions/orderActions";
 import IngredientDetails from "../IngredientDetails/IngredientDetails";
-import OrderDetails from "../OrderDetails/OrderDetails";
+import ReadyOrderDetails from "../ReadyOrderDetails/ReadyOrderDetails";
 
-import {
-    Routes,
-    Route,
-    useLocation,
-    useNavigate,
-} from "react-router-dom";
-import { LoginPage } from "../../pages/LoginPage";
-import { RegistrationPage } from "../../pages/RegistrationPage";
-import { RememberPassword } from "../../pages/RememberPassword";
-import { ResetPasswordPage } from "../../pages/ResetPasswordPage";
-import { ProfilePage } from "../../pages/ProfilePage";
-import { ProfileOrders } from "../../pages/ProfileOrders";
-import { ProfileUser } from "../../pages/ProfileUser";
-import { IngredientPage } from "../../pages/ingredientPage";
-import { getUser } from "../../services/actions/authActions";
-import {
-    OnlyUnauthenticated,
-    OnlyAuthenticated,
-} from "../ProtectedRoute/ProtectedRoute";
+import {Route, Routes, useLocation, useNavigate,} from "react-router-dom";
+import {LoginPage} from "../../pages/LoginPage";
+import {RegistrationPage} from "../../pages/RegistrationPage";
+import {RememberPassword} from "../../pages/RememberPassword";
+import {ResetPasswordPage} from "../../pages/ResetPasswordPage";
+import {ProfilePage} from "../../pages/ProfilePage";
+import {ProfileOrders} from "../../pages/ProfileOrders";
+import {ProfileUser} from "../../pages/ProfileUser";
+import {IngredientPage} from "../../pages/ingredientPage";
+import {ReadyOrderPage} from "../../pages/ReadyOrderPage";
+import {getUser} from "../../services/actions/authActions";
+import {OnlyAuthenticated, OnlyUnauthenticated,} from "../ProtectedRoute/ProtectedRoute";
 import {useAppDispatch, useAppSelector} from "../../utils/hooks";
+import FeedPage from "../../pages/FeedPage";
+import OrderDetails from "../OrderDetails/OrderDetails";
+import {WS_CONNECTION_START} from "../../services/constants";
+import {ReadyUserOrderPage} from "../../pages/ReadyUserOrderPage";
+import Preloader from "../Preloader/Preloader";
 
 function App() {
     const dispatch = useAppDispatch();
     const order = useAppSelector((state) => state.order.orderData);
+    const isOrderModalOpen = useAppSelector((state) => state.order.isOrderModalOpen);
     const location = useLocation();
     const navigate = useNavigate();
     const background = location.state && location.state.background;
 
     useEffect(() => {
-        const token = localStorage.getItem("accessToken");
+        const token = localStorage.getItem("accessToken"); //здесь токен с bearer
         if (token) {
             dispatch(getUser());
         }
         dispatch(fetchIngredients());
+        dispatch({type: WS_CONNECTION_START, payload: `/all`});
     }, [dispatch]);
 
     const closeIngredientModal = () => {
@@ -53,33 +53,37 @@ function App() {
 
     return (
         <div className={styles.app}>
-            <AppHeader />
+            <AppHeader/>
             <Routes location={background || location}>
-                <Route path="/" element={<Main />} />
+                <Route path="/" element={<Main/>}/>
                 <Route
                     path="login"
-                    element={<OnlyUnauthenticated element={<LoginPage />} />}
+                    element={<OnlyUnauthenticated element={<LoginPage/>}/>}
                 />
                 <Route
                     path="/register"
-                    element={<OnlyUnauthenticated element={<RegistrationPage />} />}
+                    element={<OnlyUnauthenticated element={<RegistrationPage/>}/>}
                 />
                 <Route
                     path="/forgot-password"
-                    element={<OnlyUnauthenticated element={<RememberPassword />} />}
+                    element={<OnlyUnauthenticated element={<RememberPassword/>}/>}
                 />
                 <Route
                     path="/reset-password"
-                    element={<OnlyUnauthenticated element={<ResetPasswordPage />} />}
+                    element={<OnlyUnauthenticated element={<ResetPasswordPage/>}/>}
                 />
                 <Route
                     path="/profile"
-                    element={<OnlyAuthenticated element={<ProfilePage />} />}
+                    element={<OnlyAuthenticated element={<ProfilePage/>}/>}
                 >
-                    <Route path="/profile" element={<ProfileUser />} />
-                    <Route path="/profile/orders" element={<ProfileOrders />} />
+                    <Route path="/profile" element={<ProfileUser/>}/>
+                    <Route path="/profile/orders" element={<ProfileOrders/>}/>
+
                 </Route>
-                <Route path="/ingredients/:id" element={<IngredientPage />} />
+                <Route path="/ingredients/:id" element={<IngredientPage/>}/>
+                <Route path="/feed" element={<FeedPage/>}> </Route>
+                <Route path="/feed/:id" element={<ReadyOrderPage/>}/>
+                <Route path="/profile/orders/:id" element={<OnlyAuthenticated element={<ReadyUserOrderPage/>}/>}/>
             </Routes>
             {background && (
                 <Routes>
@@ -87,16 +91,40 @@ function App() {
                         path="ingredients/:id"
                         element={
                             <Modal closeModal={closeIngredientModal}>
-                                <IngredientDetails />
+                                <IngredientDetails/>
+                            </Modal>
+                        }
+                    />
+                    <Route
+                        path="feed/:id"
+                        element={
+                            <Modal closeModal={closeIngredientModal}>
+                                <ReadyOrderDetails/>
+                            </Modal>
+                        }
+                    />
+                    <Route
+                        path="/profile/orders/:id"
+                        element={
+                            <Modal closeModal={closeIngredientModal}>
+                                <ReadyOrderDetails/>
                             </Modal>
                         }
                     />
                 </Routes>
             )}
-
-            {order && (
+            {isOrderModalOpen && (
                 <Modal closeModal={closeOrderModal}>
-                    <OrderDetails order={order} />
+                    {order ?
+                        <OrderDetails order={order}/>
+                        :
+                        <div>
+                            <Preloader/>
+                            <p className='text text_type_main-medium mt-5'>
+                                Оформляем заказ<br/>Подождите 15 секунд
+                            </p>
+                        </div>
+                    }
                 </Modal>
             )}
         </div>
@@ -104,3 +132,5 @@ function App() {
 }
 
 export default App;
+
+
