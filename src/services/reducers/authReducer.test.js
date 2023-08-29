@@ -36,6 +36,43 @@ describe('auth reducer test', () => {
         })
     });
 
+    it('should handle LOGOUT_USER', () => {
+        expect(authReducer(initialState, {type: LOGOUT_USER, user} )).toEqual({
+            ...initialState,
+        })
+    });
+
+    it('should handle SET_USER', () => {
+        expect(authReducer(initialState, {type: SET_USER, user} )).toEqual({
+            ...initialState,
+            user: user,
+            isAuthorized: true,
+        })
+    });
+
+    it('should handle UPDATE_USER', () => {
+        expect(authReducer(initialState, {type: UPDATE_USER, user} )).toEqual({
+            ...initialState,
+            user: user,
+            isAuthorized: true,
+        })
+    });
+
+    it('should handle PASSWORD_RESET_PENDING', () => {
+        expect(authReducer(initialState, {type: PASSWORD_RESET_PENDING} )).toEqual({
+            ...initialState,
+            isPasswordResetPending: true,
+        })
+    });
+
+    it('should handle CLEAR_PASSWORD_RESET', () => {
+        expect(authReducer(initialState, {type: CLEAR_PASSWORD_RESET} )).toEqual({
+            ...initialState,
+            isPasswordResetPending: false,
+        })
+    });
+
+
 
 
 });
