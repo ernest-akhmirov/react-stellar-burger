@@ -77,5 +77,4 @@ describe('burgerConstructor reducer test', () => {
         expect(burgerConstructorReducer(TestState, {type: CLEAR_INGREDIENT})).toEqual(initialState)
     });
 
-
-})
+});
