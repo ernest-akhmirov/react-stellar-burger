@@ -1,3 +1,6 @@
-# Каноническая работа проекта Stellar Burger 
-# Этап "Промежуточный проект. CRA-заготовка и структура папок под компоненты"
-# Sprint-11
+# Каноническая работа проекта Stellar Burger
+
+Ссылка на проект: [Stellar Burger](https://ernest-akhmirov.github.io/react-stellar-burger/)
+
+
+## Sprint-17
