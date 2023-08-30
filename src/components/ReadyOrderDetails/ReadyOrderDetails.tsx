@@ -1,5 +1,4 @@
 import styles from "./ReadyOrderDetails.module.css"
-
 import {useParams} from "react-router";
 import {useAppSelector} from "../../utils/hooks";
 import {TIngredient} from "../../utils/types";
@@ -28,18 +27,36 @@ export default function ReadyOrderDetails() {
             (ingredient) => ingredient._id === order
         );
         if (foundIngredient) {
+            foundIngredient.count = 1;
             orderIngredients.push(foundIngredient);
         }
     });
 
+
+    const uniqueIngredients: TIngredient[] = orderIngredients?.reduce((item: TIngredient[], ingredient) => {
+        const existingIngredient = item.find((item) => item._id === ingredient._id);
+        if (!existingIngredient) {
+            if (ingredient.type === "bun") {
+                item.push({...ingredient, count: 2});
+            } else {
+                item.push({...ingredient, count: 1});
+            }
+        } else {
+            if (existingIngredient.count !== undefined && ingredient.type !== 'bun') {
+                existingIngredient.count++;
+            }
+        }
+        return item;
+    }, []);
+
     const cardTotalCost = (ingredients: TIngredient[]) =>
         ingredients.reduce(
-            (accum, current) => accum + (current.type === "bun" ? current.price * 2 : current.price),
+            (accum, current) => accum + (current.price * (current.count ?? 0)),
             0
         );
 
     const renderFillers = () => {
-        return orderIngredients.map((el, index) => {
+        return uniqueIngredients.map((el, index) => {
             return (
                 <div className={styles.items_box} key={index}>
                     <div className={styles.ingredient}>
@@ -57,7 +74,7 @@ export default function ReadyOrderDetails() {
                         <p style={{whiteSpace: 'nowrap'}}
                            className=" text text_type_digits-default"
                         >
-                            {`${(el.type === "bun") ? 2 : 1} x ${el.price}`}
+                            {`${(el.type === "bun") ? 2 : el.count} x ${el.price}`}
                         </p>
                         <CurrencyIcon type="primary"/>
                     </div>
@@ -65,7 +82,7 @@ export default function ReadyOrderDetails() {
             );
         });
     };
-   
+
 
     return (
         <div className={`${styles.section} `}>
@@ -83,7 +100,7 @@ export default function ReadyOrderDetails() {
                                    mr-2`}
                                date={today}/>
                 <div className={styles.orderPrice}>
-                    <p className="text text_type_digits-default mr-2">{cardTotalCost(orderIngredients)}</p>
+                    <p className="text text_type_digits-default mr-2">{cardTotalCost(uniqueIngredients)}</p>
                     <CurrencyIcon type={"primary"}/>
                 </div>
             </div>

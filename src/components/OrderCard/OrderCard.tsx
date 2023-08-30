@@ -29,11 +29,15 @@ function OrderCard({order}: OrderCardProps) {
         }
     }, [ingredients]);
 
-    const cardTotalCost = (ingredients: TIngredient[]) =>
-        ingredients.reduce(
-            (accum, current) => accum + (current.type === "bun" ? current.price * 2 : current.price),
-            0
-        );
+    const cardTotalCost = (ingredients: TIngredient[]) => {
+        const bunIngredient = ingredients.find(ingredient => ingredient.type === "bun");
+        const nonBunIngredients = ingredients.filter(ingredient => ingredient.type !== "bun");
+
+        const bunCost = bunIngredient ? bunIngredient.price * 2 : 0;
+        const nonBunCost = nonBunIngredients.reduce((accum, current) => accum + current.price * (current.count || 1), 0);
+
+        return bunCost + nonBunCost;
+    };
 
     const openOrderHandler = () => {
         if (location.pathname.indexOf("feed") === -1) {

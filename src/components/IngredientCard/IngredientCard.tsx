@@ -25,7 +25,7 @@ const IngredientCard = ({item}: { item: TIngredient }) => {
         if (item.type === "bun") {
             return (bun as TIngredient)._id === item._id ? 2 : 0;
         }
-        return notBuns.filter((i: TIngredient) => i._id === item._id).length;
+        return notBuns.filter((i) => i._id === item._id).length;
     });
 
 

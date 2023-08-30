@@ -1,10 +1,16 @@
 import styles from "./FeedPage.module.css"
 import OrderCard from "../components/OrderCard/OrderCard";
-import {useAppSelector} from "../utils/hooks";
-import {TWSOrder} from "../services/actions/WSActions";
+import {useAppDispatch, useAppSelector} from "../utils/hooks";
+import {useEffect} from "react";
+import {WS_CONNECTION_CLOSED, WS_CONNECTION_START} from "../services/constants";
 
 function FeedPage() {
 
+    const dispatch = useAppDispatch();
+    useEffect(() => {
+        dispatch({ type: WS_CONNECTION_START, payload: `/all` });
+        return () => {dispatch({ type: WS_CONNECTION_CLOSED })};
+    }, [dispatch]);
     const {orders, total, totalToday} = useAppSelector(store => ({
         orders: store.wsReducer.orders,
         total: store.wsReducer.total,
@@ -16,7 +22,7 @@ function FeedPage() {
             <h2 className={"text text_type_main-large pt-10 pb-5"}>Лента Заказов</h2>
             <div className={styles.main}>
                 <section className={styles.OrdersSection}>
-                    {orders.map((order: TWSOrder) => (
+                    {orders.map((order) => (
                         <OrderCard
                             key={order._id}
                             order={order}/>
@@ -27,7 +33,7 @@ function FeedPage() {
                         <div className={styles.Done}>
                             <h2 className={"text text_type_main-medium mb-6"}>Готовы:</h2>
                             <ul className={styles.OrdersList}>
-                                {orders.slice(0, 20).map((num: TWSOrder) => (
+                                {orders.slice(0, 20).map((num) => (
                                     num.status === "done" ? (
                                         <li key={num._id}
                                             className={"text text_type_digits-default  text_color_success"}>
@@ -40,7 +46,7 @@ function FeedPage() {
                         <div className={styles.Done}>
                             <h2 className={"text text_type_main-medium mb-6"}>В работе:</h2>
                             <ul className={styles.OrdersList}>
-                                {orders.slice(0, 20).map((num: TWSOrder) => (
+                                {orders.slice(0, 20).map((num) => (
                                     num.status === "pending" ? (
                                         <li key={num._id}
                                             className={"text text_type_digits-default "}>

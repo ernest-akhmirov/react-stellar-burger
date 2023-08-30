@@ -53,7 +53,7 @@ interface IWSConnectionErrorAction {
 
 interface IWSConnectionClosedAction {
     readonly type: typeof WS_CONNECTION_CLOSED;
-    payload: string;
+    payload?: string;
 }
 
 interface IWSGetOrdersAction {
@@ -78,7 +78,7 @@ interface IWSAuthConnectionErrorAction {
 
 interface IWSAuthConnectionClosedAction {
     readonly type: typeof WS_AUTH_CONNECTION_CLOSED;
-    payload: string;
+    payload?: string;
 }
 
 interface IWSGetAuthOrdersAction {
