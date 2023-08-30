@@ -31,7 +31,7 @@ const IngredientCard = ({item}: { item: TIngredient }) => {
 
     return (
         <div className={`${cardStyle.card} mb-10`} onClick={openIngredientDetailsHandler}>
-            <img src={item.image} alt={item.name} draggable ref={dragRef}/>
+            <img className='ingredientImg' src={item.image} alt={item.name} draggable ref={dragRef}/>
             <div className={`${cardStyle.price} mt-1`}>
                 <p className="text text_type_main-default mr-2">{item.price}</p>
                 <CurrencyIcon type={'primary'}/>

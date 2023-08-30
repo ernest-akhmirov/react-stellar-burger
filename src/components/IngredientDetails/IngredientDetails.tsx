@@ -37,8 +37,8 @@ const IngredientDetails: FC = () => {
                     <p className="text text_type_digits-default">{item.proteins}</p>
                 </div>
                 <div className={`${detailsStyle.detail} text_color_inactive`}>
-                    <p className="text text_type_digits-default">{item.fat}</p>
                     <p className="text text_type_main-default">Жиры, г</p>
+                    <p className="text text_type_digits-default">{item.fat}</p>
                 </div>
                 <div className={`${detailsStyle.detail} text_color_inactive`}>
                     <p className="text text_type_main-default">Углеводы, г</p>
