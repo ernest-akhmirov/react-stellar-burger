@@ -34,8 +34,6 @@ describe('ws reducer tests', () => {
         expect(wsReducer(initialState, {type: WS_CONNECTION_START, payload: ''}))
             .toEqual({
                 ...initialState,
-                wsConnected: false,
-                wsError: undefined
             });
     });
 
@@ -44,7 +42,6 @@ describe('ws reducer tests', () => {
             .toEqual({
                 ...initialState,
                 wsConnected: true,
-                wsError: undefined
             });
     });
 
@@ -52,7 +49,6 @@ describe('ws reducer tests', () => {
         expect(wsReducer(initialState, {type: WS_CONNECTION_ERROR, payload: 'err'}))
             .toEqual({
                 ...initialState,
-                wsConnected: false,
                 wsError: 'err'
             });
     });
@@ -61,7 +57,6 @@ describe('ws reducer tests', () => {
         expect(wsReducer(initialState, {type: WS_GET_ORDERS, payload: orders})).toEqual({
             ...initialState,
             wsConnected: true,
-            wsError: undefined,
             orders: [{order: 1}, {order: 2}],
             total: 1000,
             totalToday: 2,
@@ -79,8 +74,6 @@ describe('ws reducer tests', () => {
         expect(wsReducer(initialState, {type: WS_AUTH_CONNECTION_START, payload: ''}))
             .toEqual({
                 ...initialState,
-                wsConnected: false,
-                wsError: undefined
             });
     });
 
@@ -89,7 +82,6 @@ describe('ws reducer tests', () => {
             .toEqual({
                 ...initialState,
                 wsAuthConnected: true,
-                wsAuthError: undefined
             });
     });
 
@@ -97,7 +89,6 @@ describe('ws reducer tests', () => {
         expect(wsReducer(initialState, {type: WS_AUTH_CONNECTION_ERROR, payload: 'err'}))
             .toEqual({
                 ...initialState,
-                wsAuthConnected: false,
                 wsAuthError: 'err'
             });
     });
@@ -106,7 +97,6 @@ describe('ws reducer tests', () => {
         expect(wsReducer(initialState, {type: WS_GET_AUTH_ORDERS, payload: userOrders})).toEqual({
             ...initialState,
             wsAuthConnected: true,
-            wsAuthError: undefined,
             userOrders: [{order: 1}, {order: 2}],
             total: 1000,
             totalToday: 2,

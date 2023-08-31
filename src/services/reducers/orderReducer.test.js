@@ -16,8 +16,6 @@ describe('order reducer test', () => {
         expect(orderReducer(initialState, {type: PLACE_ORDER_REQUEST})).toEqual({
             ...initialState,
             orderRequest: true,
-            orderSuccess: false,
-            orderError: false,
             isOrderModalOpen: true,
         });
     });
@@ -26,9 +24,7 @@ describe('order reducer test', () => {
 
         expect(orderReducer(initialState, {type: PLACE_ORDER_SUCCESS, orderData})).toEqual({
             ...initialState,
-            orderRequest: false,
             orderSuccess: true,
-            orderError: false,
             orderData: orderData,
             isOrderModalOpen: true,
         });
@@ -37,21 +33,14 @@ describe('order reducer test', () => {
     it('should handle PLACE_ORDER_ERROR', () => {
         expect(orderReducer(initialState, {type: PLACE_ORDER_ERROR})).toEqual({
             ...initialState,
-            orderRequest: false,
-            orderSuccess: false,
             orderError: true,
-            isOrderModalOpen: false,
         });
     });
 
     it('should handle CLOSE_ORDER_DETAILS', () => {
         expect(orderReducer(initialState, {type: CLOSE_ORDER_DETAILS})).toEqual({
             ...initialState,
-            orderData: null,
-            orderRequest: false,
-            orderSuccess: false,
             orderError: true,
-            isOrderModalOpen: false,
         });
     });
 })

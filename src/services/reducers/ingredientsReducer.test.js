@@ -25,7 +25,6 @@ describe('ingredient reducer tests', () => {
         expect(ingredientsReducer(initialState, {type: GET_INGREDIENTS_REQUEST})).toEqual({
             ...initialState,
             ingredientsRequest: true,
-            ingredientsFailed: false
         });
     });
 
@@ -33,8 +32,6 @@ describe('ingredient reducer tests', () => {
         expect(ingredientsReducer(initialState, {type: GET_INGREDIENTS_SUCCESS, ingredients: [testIngredient]})
         ).toEqual({
             ...initialState,
-            ingredientsRequest: false,
-            ingredientsFailed: false,
             ingredients: [testIngredient]
         });
     });
@@ -42,7 +39,6 @@ describe('ingredient reducer tests', () => {
     it('should return error state', () => {
         expect(ingredientsReducer(initialState, {type: GET_INGREDIENTS_ERROR})).toEqual({
             ...initialState,
-            ingredientsRequest: false,
             ingredientsFailed: true
         });
     });

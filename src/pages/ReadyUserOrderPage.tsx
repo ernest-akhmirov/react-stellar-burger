@@ -11,7 +11,6 @@ export function ReadyUserOrderPage() {
         const token = localStorage.getItem("accessToken");
         const cleanedToken = token?.replace("Bearer ", "");
         dispatch({type: WS_AUTH_CONNECTION_START, payload: `?token=${cleanedToken}`});
-        return () => {dispatch({ type: WS_AUTH_CONNECTION_CLOSED })};
     }, [dispatch]);
 
     return (

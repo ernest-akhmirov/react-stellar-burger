@@ -106,7 +106,7 @@ function App() {
                         path="/profile/orders/:id"
                         element={
                             <Modal closeModal={closeIngredientModal}>
-                                {<OnlyAuthenticated element={<ReadyUserOrderPage/>} />}
+                                {<OnlyAuthenticated element={<ReadyUserOrderPage/>}/>}
                             </Modal>
                         }
                     />
@@ -131,5 +131,4 @@ function App() {
 }
 
 export default App;
-
 

@@ -1,11 +1,6 @@
 import React from 'react';
 import {NavLink, useLocation} from 'react-router-dom';
-import {
-    BurgerIcon,
-    ListIcon,
-    Logo,
-    ProfileIcon
-} from '@ya.praktikum/react-developer-burger-ui-components';
+import {BurgerIcon, ListIcon, Logo, ProfileIcon} from '@ya.praktikum/react-developer-burger-ui-components';
 import styles from './AppHeader.module.css';
 
 export default function AppHeader() {
@@ -45,7 +40,11 @@ export default function AppHeader() {
                     </NavLink>
                 </nav>
                 <div className={styles.logo}>
-                    <Logo/>
+                    <NavLink
+                        to="/"
+                    >
+                        <Logo/>
+                    </NavLink>
                 </div>
                 <NavLink
                     to="/profile"

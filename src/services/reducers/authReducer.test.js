@@ -68,11 +68,6 @@ describe('auth reducer test', () => {
     it('should handle CLEAR_PASSWORD_RESET', () => {
         expect(authReducer(initialState, {type: CLEAR_PASSWORD_RESET} )).toEqual({
             ...initialState,
-            isPasswordResetPending: false,
         })
     });
-
-
-
-
 });
