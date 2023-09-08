@@ -1,7 +1,7 @@
 import {Navigate, useLocation} from "react-router-dom";
 import React, {FC, ReactElement} from "react";
 import {useAppSelector} from "../../utils/hooks";
-import {RootState} from "../../utils/types";
+
 
 
 type TProtectedProps = {
@@ -9,7 +9,7 @@ type TProtectedProps = {
     element: ReactElement;
 };
 const Protected: FC<TProtectedProps> = ({onlyUnauthenticated = false, element}) => {
-    const user = useAppSelector((store: RootState) => store.authReducer.user);
+    const user = useAppSelector((store) => store.authReducer.user);
     const location = useLocation();
 
     if (onlyUnauthenticated && user) {

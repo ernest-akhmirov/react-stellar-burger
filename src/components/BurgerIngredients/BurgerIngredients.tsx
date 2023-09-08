@@ -4,7 +4,6 @@ import ingredientsStyles from "./BurgerIngredients.module.css";
 import IngredientCard from "../IngredientCard/IngredientCard";
 import {useInView} from "react-intersection-observer";
 import Preloader from "../Preloader/Preloader";
-import {TIngredient} from "../../utils/types";
 import {useAppSelector} from "../../utils/hooks";
 
 const BurgerIngredients: FC = () => {
@@ -29,9 +28,9 @@ const BurgerIngredients: FC = () => {
     const {ref: mainRef, inView: mainInView} = useInView();
 
     const {buns, sauces, main} = useMemo(() => {
-        const buns = data.filter((item: TIngredient) => item.type === "bun");
-        const sauces = data.filter((item: TIngredient) => item.type === "sauce");
-        const main = data.filter((item: TIngredient) => item.type === "main");
+        const buns = data.filter((item) => item.type === "bun");
+        const sauces = data.filter((item) => item.type === "sauce");
+        const main = data.filter((item) => item.type === "main");
 
 
         return {buns, sauces, main};
@@ -99,7 +98,7 @@ const BurgerIngredients: FC = () => {
                             <div className={ingredientsStyles.cardList}
                                  ref={tab.type === 'bun' ? bunRef :
                                      tab.type === 'sauce' ? sauceRef : mainRef}>
-                                {tab.data.map((item: TIngredient) => (
+                                {tab.data.map((item) => (
                                     <IngredientCard
                                         item={item}
                                         key={item._id}

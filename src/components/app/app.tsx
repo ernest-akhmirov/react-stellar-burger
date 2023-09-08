@@ -41,7 +41,6 @@ function App() {
             dispatch(getUser());
         }
         dispatch(fetchIngredients());
-        dispatch({type: WS_CONNECTION_START, payload: `/all`});
     }, [dispatch]);
 
     const closeIngredientModal = () => {
@@ -107,7 +106,7 @@ function App() {
                         path="/profile/orders/:id"
                         element={
                             <Modal closeModal={closeIngredientModal}>
-                                <ReadyOrderDetails/>
+                                {<OnlyAuthenticated element={<ReadyUserOrderPage/>}/>}
                             </Modal>
                         }
                     />
@@ -132,5 +131,4 @@ function App() {
 }
 
 export default App;
-
 

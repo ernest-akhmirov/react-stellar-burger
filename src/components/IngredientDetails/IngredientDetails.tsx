@@ -1,14 +1,14 @@
 import React, {FC} from "react";
 import detailsStyle from "../IngredientDetails/IngredientDetails.module.css";
 import {useParams} from "react-router";
-import {RootState, TIngredient} from "../../utils/types";
+import { TIngredient} from "../../utils/types";
 import {useAppSelector} from "../../utils/hooks";
 
 const IngredientDetails: FC = () => {
     const {id} = useParams()
 
-    const ingredients = useAppSelector((state: RootState) => state.ingredients.ingredients);
-    const item: TIngredient | undefined = ingredients.find((el: TIngredient) => el._id === id);
+    const ingredients = useAppSelector((state) => state.ingredients.ingredients);
+    const item: TIngredient | undefined = ingredients.find((el) => el._id === id);
 
     if (!item) {
         return (
@@ -37,8 +37,8 @@ const IngredientDetails: FC = () => {
                     <p className="text text_type_digits-default">{item.proteins}</p>
                 </div>
                 <div className={`${detailsStyle.detail} text_color_inactive`}>
-                    <p className="text text_type_digits-default">{item.fat}</p>
                     <p className="text text_type_main-default">Жиры, г</p>
+                    <p className="text text_type_digits-default">{item.fat}</p>
                 </div>
                 <div className={`${detailsStyle.detail} text_color_inactive`}>
                     <p className="text text_type_main-default">Углеводы, г</p>

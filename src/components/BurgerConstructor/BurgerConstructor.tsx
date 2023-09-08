@@ -16,9 +16,9 @@ import {useAppDispatch, useAppSelector} from "../../utils/hooks";
 const BurgerConstructor: FC = () => {
     const dispatch = useAppDispatch();
     const navigate = useNavigate();
-    const bun = useAppSelector((state: RootState) => state.burgerFilling.bun);
-    const notBuns = useAppSelector((state: RootState) => state.burgerFilling.notBuns);
-    const isAuthorized = useAppSelector((state: RootState) => state.authReducer.isAuthorized);
+    const bun = useAppSelector((state) => state.burgerFilling.bun);
+    const notBuns = useAppSelector((state) => state.burgerFilling.notBuns);
+    const isAuthorized = useAppSelector((state) => state.authReducer.isAuthorized);
 
     const ingredientsList: string[] = notBuns.map((item) => item._id);
     if ('_id' in bun) {
@@ -42,7 +42,7 @@ const BurgerConstructor: FC = () => {
             sum += bun.price * 2;
         }
         if (notBuns && notBuns.length) {
-            sum += notBuns.reduce((acc: number, current: TIngredient) => acc + current.price, 0);
+            sum += notBuns.reduce((acc, current) => acc + current.price, 0);
         }
         return sum;
     }, [bun, notBuns]);

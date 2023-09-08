@@ -4,7 +4,6 @@ import {Input, Button,} from "@ya.praktikum/react-developer-burger-ui-components
 import {useNavigate,} from "react-router-dom";
 import {login} from '../services/actions/authActions';
 import {useAppDispatch, useAppSelector} from "../utils/hooks";
-import {RootState} from "../utils/types";
 
 export const LoginPage = () => {
     const navigate = useNavigate();
@@ -16,7 +15,7 @@ export const LoginPage = () => {
         setValue({...form, [e.target.name]: e.target.value});
     };
 
-    const isAuthorized = useAppSelector((store: RootState) => store.authReducer.isAuthorized);
+    const isAuthorized = useAppSelector((store) => store.authReducer.isAuthorized);
 
     const onSubmit = (e: FormEvent<HTMLFormElement>): void => {
         e.preventDefault();

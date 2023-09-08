@@ -25,13 +25,13 @@ const IngredientCard = ({item}: { item: TIngredient }) => {
         if (item.type === "bun") {
             return (bun as TIngredient)._id === item._id ? 2 : 0;
         }
-        return notBuns.filter((i: TIngredient) => i._id === item._id).length;
+        return notBuns.filter((i) => i._id === item._id).length;
     });
 
 
     return (
         <div className={`${cardStyle.card} mb-10`} onClick={openIngredientDetailsHandler}>
-            <img src={item.image} alt={item.name} draggable ref={dragRef}/>
+            <img className='ingredientImg' src={item.image} alt={item.name} draggable ref={dragRef}/>
             <div className={`${cardStyle.price} mt-1`}>
                 <p className="text text_type_main-default mr-2">{item.price}</p>
                 <CurrencyIcon type={'primary'}/>
